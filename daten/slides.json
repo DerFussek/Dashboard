@@ -1,0 +1,16 @@
+{
+    "slide 1": {
+      "name": "Servus",
+      "production": 8381.8,
+      "consumption": 2608.7,
+      "autarky": 86
+    },
+    
+    "slide 2": {
+      "name": "Heute",
+      "production": 8381.8,
+      "consumption": 2608.7,
+      "autarky": 86
+    }
+}
+  

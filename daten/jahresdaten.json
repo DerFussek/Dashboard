@@ -1,0 +1,23 @@
+{
+    "2022": {
+      "production": 8381.8,
+      "consumption": 2608.7,
+      "autarky": 86
+    },
+    "2023": {
+      "production": 8795.3,
+      "consumption": 4332.8,
+      "autarky": 76
+    },
+    "2024": {
+      "production": 7989.9,
+      "consumption": 5111.2,
+      "autarky": 75
+    },
+    "2025": {
+      "production": 1370.4,
+      "consumption": 1240.4,
+      "autarky": 66
+    }
+  }
+  

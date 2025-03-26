@@ -1,0 +1,199 @@
+<html>
+    <head lang="de">
+        <meta charset="UTF-8">
+        <style>
+            @font-face {
+              font-family: 'Pally-Regular';
+              src: url('/fonts/Pally-Regular.woff2') format('woff2'),
+                  url('/fonts/Pally-Regular.woff') format('woff'),
+                  url('/fonts/Pally-Regular.ttf') format('truetype');
+              font-weight: 400;
+              font-display: swap;
+              font-style: normal;
+            }
+            @font-face {
+              font-family: 'Pally-Medium';
+              src: url('/fonts/Pally-Medium.woff2') format('woff2'),
+                  url('/fonts/Pally-Medium.woff') format('woff'),
+                  url('/fonts/Pally-Medium.ttf') format('truetype');
+              font-weight: 500;
+              font-display: swap;
+              font-style: normal;
+            }
+            @font-face {
+              font-family: 'Pally-Bold';
+              src: url('/fonts/Pally-Bold.woff2') format('woff2'),
+                  url('/fonts/Pally-Bold.woff') format('woff'),
+                  url('/fonts/Pally-Bold.ttf') format('truetype');
+              font-weight: 700;
+              font-display: swap;
+              font-style: normal;
+            }
+            @font-face {
+              font-family: 'Pally-Variable';
+              src: url('/fonts/Pally-Variable.woff2') format('woff2'),
+                  url('/fonts/Pally-Variable.woff') format('woff'),
+                  url('/fonts/Pally-Variable.ttf') format('truetype');
+              font-weight: 400 700;
+              font-display: swap;
+              font-style: normal;
+            }
+      
+            .font-regular {
+                font-family: 'Pally-Regular', sans-serif;
+                font-weight: 400;
+                }
+      
+            .font-medium {
+                font-family: 'Pally-Medium', sans-serif;
+                font-weight: 500;
+            }
+      
+            .font-bold {
+                font-family: 'Pally-Bold', sans-serif;
+                font-weight: 700;
+            }
+      
+            .font-variable {
+                font-family: 'Pally-Variable', sans-serif;
+            }
+
+            .hourly-item {
+                display: flex;
+                flex-direction: column; /* Ordnet die Elemente vertikal an */
+                align-items: center; /* Zentriert die Elemente horizontal */
+                margin-right: 20px; /* Abstand zwischen den stündlichen Vorhersagen */
+                width: 70px; /* Optional: Breite für jedes stündliche Vorhersage-Element */
+                color: white;
+                font-family: 'Pally-Regular', sans-serif;
+            }
+
+            @keyframes scroll {
+                0% {
+                    transform: translateX(100%); /* Start am rechten Rand */
+                }
+                100% {
+                    transform: translateX(-100%); /* Endet am linken Rand */
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="Wetter" style="left: 0px; top: 0px; position: absolute; width: 540.5338px; height: 510px; background: rgba(128, 196, 233, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;">
+                <img id="weather-icon" alt="Weather Icon" style="width: 250px; height: 250px; position:absolute; top:0px; left: 145.2669px;  background-color: rgba(0, 0, 0, 0.0);">
+                <div id="temp-div" style="top: 220px; left: 0px; text-align: center; position: absolute; color: #ffffff; font-size: 75px; font-family: 'Pally-Variable', sans-serif; font-weight: 200; word-wrap: break-word; width: 540px; text-align: center;">15s warten</div>
+                <div id="weather-info" style="top: 300px; left: 0px; text-align: center; position: absolute; color: #ffffff; font-size: 46px; font-family: 'Pally-Variable', sans-serif; font-weight: 150; word-wrap: break-word; width: 540px; text-align: center;">lul</div>
+                <div id="hourly-forecast" style="top: 383px; left: 0px; font-size: 20px; position: absolute; overflow-x: hidden; white-space: nowrap; justify-content: left; width: 560.5338px; overflow-x: hidden; display:flex; flex: row; animation: scroll 30s linear infinite; overflow: hidden; background-color: rgba(0, 0, 0, 0.0);"></div>
+                <div id="hourly-forecast2" style="top: 383px; left: 0px; font-size: 20px; position: absolute; overflow-x: hidden; white-space: nowrap; justify-content: left; width: 560.5338px; overflow-x: hidden; display:flex; flex: row; animation: scroll 30s linear infinite; animation-delay: 15s; overflow: hidden; background-color: rgba(0, 0, 0, 0.0);"></div>
+                
+                
+            
+        </div>    
+
+        <script>
+            window.onload = function() {
+                getWeatherData();
+                setInterval(getWeatherData, 60000);
+            }
+            
+
+            
+            function getWeatherData() {
+                const apiKey = '67e929e1991c12c471f1d86828a35c38';
+                const city = 'Gauangelloch';
+                const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`; // Metric Einheiten für Celsius
+        
+                fetch(currentWeatherUrl)
+                .then(response => response.json())
+                .then(data => {
+                    displayWeather(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching current weather data:', error);
+                    alert('Error fetching current weather data. Please try again.');
+                });
+
+                const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`; // Metric Einheiten für Celsius
+        
+                fetch(forecastUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        displayHourlyForecast(data.list);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching hourly forecast data:', error);
+                        alert('Error fetching hourly forecast data. Please try again.');
+                    });
+            }
+        
+            function displayWeather(data) {
+                const tempDivInfo = document.getElementById('temp-div');
+                const weatherInfoDiv = document.getElementById('weather-info');
+                const weatherIcon = document.getElementById('weather-icon');
+        
+                weatherInfoDiv.innerHTML = '';
+                tempDivInfo.innerHTML = '';
+                
+                if(data.cod === '404') {
+                    weatherInfoDiv.innerHTML = `<p>${data.message}</p>`;
+                } else {
+                    const cityName = data.name; // Stadtname
+                    const temperature = Math.round(data.main.temp); // Temperatur in °C
+                    const feelsLike = data.main.feels_like; // "Gefühlt wie" Temperatur
+                    const description = data.weather[0].description; // Wetterbeschreibung
+                    const iconCode = data.weather[0].icon; // Icon Code für das Wetter
+                    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`; // Wettericon-URL
+                    const windSpeed = data.wind.speed; // Windgeschwindigkeit
+                    const humidity = data.main.humidity; // Luftfeuchtigkeit
+                    const rainVolume = data.rain ? data.rain['1h'] : 0; // Regenvolumen der letzten Stunde (optional)
+        
+                    // HTML für die Temperatur und Wetterdetails
+                    const temperatureHTML = `
+                        <b>${temperature}°C</b>
+                    `;
+        
+                    
+                    // Setze den Inhalt in die entsprechenden Divs
+                    tempDivInfo.innerHTML = temperatureHTML;
+                    weatherInfoDiv.innerHTML = data.weather[0].main;
+                    weatherIcon.src = iconUrl;
+                    weatherIcon.alt = description;
+        
+                    showImage();
+                }
+            }
+
+            function displayHourlyForecast(hourlyData) {
+                const hourlyForecastDiv = document.getElementById('hourly-forecast');
+                const hourlyForecastDiv2 = document.getElementById('hourly-forecast2');
+
+                const next24Hours = hourlyData.slice(0, 8); // Display the next 24 hours (3-hour intervals)
+
+                next24Hours.forEach(item => {
+                    const dateTime = new Date(item.dt * 1000); // Convert timestamp to milliseconds
+                    const hour = dateTime.getHours();
+                    const temperature = Math.round(item.main.temp - 273.15); // Convert to Celsius
+                    const iconCode = item.weather[0].icon;
+                    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
+
+                    const hourlyItemHtml = `
+                        <div class="hourly-item">
+                            <span>${hour}:00</span>
+                            <img src="${iconUrl}" alt="Hourly Weather Icon">
+                            <span>${temperature}°C</span>
+                        </div>
+                    `;
+
+                    hourlyForecastDiv.innerHTML += hourlyItemHtml;
+                    hourlyForecastDiv2.innerHTML += hourlyItemHtml;
+                });
+            }
+        
+            function showImage() {
+                const weatherIcon = document.getElementById('weather-icon');
+                weatherIcon.style.display = 'block'; // Zeige das Wetter-Icon an, sobald es geladen ist
+            }
+        </script>
+        
+    </body>
+</html>

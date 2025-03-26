@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @font-face {
+          font-family: 'Pally-Regular';
+          src: url('/fonts/Pally-Regular.ttf') format('truetype');
+          font-weight: 400;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Medium';
+          src: url('/fonts/Pally-Medium.ttf') format('truetype');
+          font-weight: 500;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Bold';
+          src: url('/fonts/Pally-Bold.ttf') format('truetype');
+          font-weight: 700;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Variable';
+          src: url('/fonts/Pally-Variable.ttf') format('truetype');
+          font-weight: 400 700;
+          font-display: swap;
+          font-style: normal;
+        }
+  
+        .font-regular {
+            font-family: 'Pally-Regular', sans-serif;
+            font-weight: 400;
+            }
+  
+        .font-medium {
+            font-family: 'Pally-Medium', sans-serif;
+            font-weight: 500;
+        }
+  
+        .font-bold {
+            font-family: 'Pally-Bold', sans-serif;
+            font-weight: 700;
+        }
+  
+        .font-variable {
+            font-family: 'Pally-Variable', sans-serif;
+        }
+
+        @keyframes Switch {
+            0% {
+                transform: translateX(488px) scale(1.638);   /* Start bei 300px */
+            }
+            4.55% {
+                transform: translateX(-0px) scale(1.638);  /* Bewegung von 300px nach 0px in 0.5 Sekunden */
+            }
+            50% {
+                transform: translateX(0px) scale(1.638);  /* Pause für 10 Sekunden bei 0px */
+            }
+            54.55% {
+                transform: translateX(-488px) scale(1.638);  /* Bewegung von 0px nach -300px in 0.5 Sekunden */
+            }
+            100% {
+                transform: translateX(-488px) scale(1.638);   /* Pause für 10 Sekunden bei -300px */
+            }
+        }
+
+/* Verwende die will-change-Eigenschaft, um die Performance der Animationen zu verbessern */
+.JahresStatistik, .TagesStatistik {
+  will-change: transform;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="Background" style="left: 0; top: 0%; position: absolute; width: 487.2332px; height: 1040px; background: #E8ECD7; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex;justify-content: center; overflow: hidden;">
+        <div class="JahresStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 30s linear infinite; ">
+            <div id="slide1-name" style="top: 7.5%; position: absolute; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 600; font-size: 32px; color: #727272;"><b>"name"</b></div>
+            <div class="gesProduktion" style="top: 17.5%; width: 150px; height: 150px; position: absolute; background-color: #FFC300; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="production-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>"produktion"</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Produktion</div>
+            </div>
+
+            <div class="gesVerbrauch" style="top: 55%; width: 150px; height: 150px; position: absolute; background-color: #FF3300; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="verbrauch-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>"consumption"</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Verbrauch</div>
+            </div>
+
+            <div class="gesAutarkie" style="top: 92.5%; width: 150px; height: 150px; position: absolute; background-color: #4942E4; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="ges-autarkie-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>"autarky"</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Autarkie</div>
+            </div>
+        </div>
+
+        <div class="TagesStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 30s linear infinite; animation-delay: 15s;">
+            <div id="slide2-name" style="top: 7.5%; position: absolute; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 600; font-size: 32px; color: #727272;"><b>"name"</b></div>
+            <div class="todayProduktion" style="top: 17.5%; width: 150px; height: 150px; position: absolute; background-color: #FFC300; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-production-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>"production"</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Produktion</div>
+            </div>
+
+            <div class="todayVerbrauch" style="top: 55%; width: 150px; height: 150px; position: absolute; background-color: #FF3300; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-verbrauch-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>"consumption"</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Verbrauch</div>
+            </div>
+
+            <div class="todayAutarkie" style="top: 92.5%; width: 150px; height: 150px; position: absolute; background-color: #4942E4; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-autarkie-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>"autarky"</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Autarkie</div>
+            </div>
+        </div>
+    </div>
+   
+    <script>    
+
+async function fetchSlides() {
+  const url = "http://dashboard:3000/slides";
+
+  fetch(url)
+    .then(response => {
+      console.log("Antwort von /slides:", response);
+      if (!response.ok) {
+        throw new Error("Netzwerk-Antwort war nicht in Ordnung.");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("Erhaltene Daten:", data);
+
+      if (data["slide 1"]) {
+        document.querySelector('.production-value').innerHTML = "<b>" + Math.round(data["slide 1"].production) + "kWh</b>";
+        document.querySelector('.verbrauch-value').innerHTML = "<b>" + Math.round(data["slide 1"].consumption) + "kWh</b>";
+        document.querySelector('.ges-autarkie-value').innerHTML = "<b>" + Math.round(data["slide 1"].autarky) + "%</b>";
+        document.getElementById('slide1-name').innerHTML = "<b>" + data["slide 1"].name + "</b>";
+    }
+
+      if (data["slide 2"]) {
+        document.querySelector('.todays-production-value').innerHTML = "<b>" + Math.round(data["slide 2"].production) + "kWh</b>";
+        document.querySelector('.todays-verbrauch-value').innerHTML = "<b>" + Math.round(data["slide 2"].consumption) + "kWh</b>";
+        document.querySelector('.todays-autarkie-value').innerHTML = "<b>" + Math.round(data["slide 2"].autarky) + "%</b>";
+        document.getElementById('slide2-name').innerHTML = "<b>" + data["slide 2"].name + "</b>";
+    }
+    })
+    .catch(error => {
+      console.error("Fehler beim Laden der Slide-Daten:", error);
+      const fehlerBox = document.getElementById("slide-fehler");
+      if (fehlerBox) {
+        fehlerBox.innerText = "Fehler beim Laden der Statistikdaten.";
+      }
+    });
+}
+
+
+
+        window.onload = function () {
+            fetchSlides(); // Lädt die Daten einmal beim Start
+        };
+    </script>
+</body>
+</html>
