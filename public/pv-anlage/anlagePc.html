@@ -337,7 +337,7 @@
         
         
         function FetchData() {
-          const url = "http://dashboard:3000/getBatteryData";
+          const url = `${window.location.origin}/getBatteryData`;
           fetch(url, {
             method: "GET",
             headers: {
@@ -415,7 +415,7 @@
           };
           
 
-          fetch('http://dashboard:3000/save', {
+          fetch(`${window.location.origin}/save`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -802,7 +802,7 @@
       }
   
       async function fetchDataToday() {
-          const response = await fetch('http://dashboard:3000/measurements.csv');
+          const response = await fetch(`${window.location.origin}/measurements.csv`);
           const data = await response.text();
           return data;
       }
@@ -853,7 +853,7 @@
       }
   
       async function fetchData2024() {
-          const response = await fetch('http://dashboard:3000/statistics/statistics.csv');
+          const response = await fetch(`${window.location.origin}/statistics/statistics.csv`);
           const data = await response.text();
           return data;
       }
@@ -904,13 +904,13 @@
       }
   
       async function fetchData2023() {
-          const response = await fetch('http://dashboard:3000/statistics/2023.csv');
+          const response = await fetch(`${window.location.origin}/statistics/2023.csv`);
           const data2023 = await response.text();
           return data2023;
       }
   
       async function fetchData2022() {
-          const response = await fetch('http://dashboard:3000/statistics/2022.csv');
+          const response = await fetch(`${window.location.origin}/statistics/2022.csv`);
           const data2022 = await response.text();
           return data2022;
       }
