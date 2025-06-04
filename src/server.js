@@ -61,14 +61,6 @@ async function getBatteryData() {
   }
 }
 
-getBatteryData()
-  .then((data) => {
-    console.log('Batteriedaten: ', data);
-  })
-  .catch((error) => {
-    console.error(error.message);
-  });
-
 // --- Funktion zum asynchronen Speichern der Daten in eine CSV-Datei ---
 async function saveData(data) {
   let timestamp = new Date(data.Timestamp).toISOString(); // ISO-Format generieren
@@ -297,7 +289,6 @@ async function initializeData() {
     console.error('Fehler bei der Initialisierung der Daten:', error.message);
   }
 }
-initializeData();
 
 // ============================================
 //             Proxy - Aufgaben
@@ -404,4 +395,16 @@ app.use((err, req, res, next) => {
 // ============================================
 //             Server - Aufgaben
 // ============================================
-app.listen(PORT, () => console.log(`Proxy läuft auf Port ${PORT}`));
+if (require.main === module) {
+  initializeData();
+  getBatteryData()
+    .then((data) => {
+      console.log('Batteriedaten: ', data);
+    })
+    .catch((error) => {
+      console.error(error.message);
+    });
+  app.listen(PORT, () => console.log(`Proxy läuft auf Port ${PORT}`));
+}
+
+module.exports = app;
