@@ -10,7 +10,7 @@ const cors = require('cors');
 // Initialisiere Express
 const app = express();
 app.use(express.json());
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(cors());
 
 // Nutze asynchrone Dateisystem-Methoden
@@ -99,7 +99,7 @@ async function saveData(data) {
     dataforcsv = [dataforcsv];
   }
 
-  const csvFilePath = path.join(__dirname, 'daten', 'measurements.csv');
+  const csvFilePath = path.join(__dirname, '..', 'data', 'measurements.csv');
 
   try {
     // Wenn die Datei noch nicht existiert, Kopfzeile hinzufügen
@@ -140,7 +140,7 @@ saveDataJob.start();
 
 // --- Funktionen zum Einlesen der Jahresdaten (JSON) ---
 async function getJahresdatenFromJSON() {
-  const filePath = path.join(__dirname, 'daten', 'jahresdaten.json');
+  const filePath = path.join(__dirname, '..', 'data', 'jahresdaten.json');
   try {
     await fsPromises.access(filePath);
     const jsonData = await fsPromises.readFile(filePath, 'utf-8');
@@ -206,7 +206,7 @@ async function getTotaldata() {
 }
 
 async function getTodaysData() {
-  const csvFilePath = path.join(__dirname, 'daten', 'measurements.csv');
+  const csvFilePath = path.join(__dirname, '..', 'data', 'measurements.csv');
   try {
     if (!fs.existsSync(csvFilePath)) {
       console.warn(`Datei ${csvFilePath} existiert nicht. Erstelle eine neue Datei.`);
@@ -345,7 +345,7 @@ app.get('/todaysData', async (req, res, next) => {
 app.get('/struktur', (req, res, next) => {
   try {
     console.log("Anfrage für statistics.csv");
-    res.sendFile(path.join(__dirname, '/struktur.png'));
+    res.sendFile(path.join(__dirname, '..', 'public', 'Struktur.png'));
     console.warn("Sende Datei");
   } catch (err) {
     next(err);
@@ -354,7 +354,7 @@ app.get('/struktur', (req, res, next) => {
 
 app.get('/slides', async (req, res, next) => {
   try {
-    const filePath = path.join(__dirname, 'daten', 'slides.json');
+    const filePath = path.join(__dirname, '..', 'data', 'slides.json');
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ error: 'Slide-Daten nicht gefunden' });
     }

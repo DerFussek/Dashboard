@@ -1,3 +1,12 @@
 # Dashboard
 
-Dieses Repository enthält den Quellcode für ein lokales Dashboard bestehend aus einem Node.js-Server und mehreren HTML-Seiten.
+Dieses Repository enthält den Quellcode für ein lokales Dashboard.
+
+## Projektstruktur
+
+- **src/** – Enthält den Node.js‑Server (`server.js`).
+- **public/** – Statische Dateien wie HTML, Bilder und Fonts.
+- **data/** – Persistente Daten (JSON/CSV).
+
+Der Server kann mit `npm start` gestartet werden und stellt die Dateien aus dem
+Ordner `public` bereit.
