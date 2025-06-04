@@ -47,7 +47,7 @@
     <script>    
 
 async function fetchSlides() {
-  const url = "http://localhost:3000/slides";
+  const url = `${window.location.origin}/slides`;
 
   fetch(url)
     .then(response => {

@@ -254,7 +254,7 @@
     </div>  
     <script>
         function FetchData() {
-          const url = "http://localhost:3000/getBatteryData";
+          const url = `${window.location.origin}/getBatteryData`;
           fetch(url)
             .then(response => {
               if (!response.ok) {
@@ -569,7 +569,7 @@
 
       async function fetchTotalData() {
         try {
-          const response = await fetch('http://dashboard:3000/getTotaldata');
+          const response = await fetch(`${window.location.origin}/getTotaldata`);
           if (!response.ok) {
             throw new Error('Netzwerkantwort war nicht ok');
           }
