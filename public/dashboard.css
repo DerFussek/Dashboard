@@ -1,0 +1,11 @@
+.dashboard-body {
+  background-color: #fff7f7;
+  position: relative;
+}
+
+.panel {
+  border: none;
+  border-radius: 32px;
+  position: absolute;
+  overflow: hidden;
+}

@@ -5,7 +5,8 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
   "author": "Til.D",
   "license": "ISC",
@@ -13,7 +14,11 @@
     "axios": "^1.7.7",
     "cors": "^2.8.5",
     "cron": "^3.1.7",
-    "express": "^4.21.0",
-    "request": "^2.88.2"
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1"
   }
 }

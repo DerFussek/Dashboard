@@ -1,15 +1,37 @@
 <html>
-    <head>
-        <title>DashBoard</title>
-    </head>
-    <body style="background-color: #FFF7F7;">
-
-        
-            
-        <iframe src="pv-anlage/anlage.html" width="783.332px" height="1050px" style="border:none; border-radius: 32px; position: absolute; top: 20px; left: 600px;"></iframe>
-        <iframe src="uhr/uhr.html" width="540.5338px" height="525px" style="border:none; border-radius: 32px; position: absolute; top: 20px; left: 20px; overflow: hidden;"></iframe>
-        <iframe src="wetter/Wetter.html" width="540.5338px" height="525px" style="border:none; border-radius: 32px; position: absolute; top: 550px; left: 20px; overflow: hidden;"></iframe>
-        <iframe src="statistik.html" width="488px" height="1050px" style="border:none; border-radius: 32px; position: absolute; top: 20px; left: 1403px; overflow: hidden;"></iframe>
-    </body>
+  <head>
+    <title>DashBoard</title>
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body class="dashboard-body">
+    <iframe
+      src="pv-anlage/anlage.html"
+      width="783.332px"
+      height="1050px"
+      class="panel"
+      style="left: 600px; top: 20px"
+    ></iframe>
+    <iframe
+      src="uhr/uhr.html"
+      width="540.5338px"
+      height="525px"
+      class="panel"
+      style="left: 20px; top: 20px"
+    ></iframe>
+    <iframe
+      src="wetter/Wetter.html"
+      width="540.5338px"
+      height="525px"
+      class="panel"
+      style="left: 20px; top: 550px"
+    ></iframe>
+    <iframe
+      src="statistik.html"
+      width="488px"
+      height="1050px"
+      class="panel"
+      style="left: 1403px; top: 20px"
+    ></iframe>
+  </body>
 </html>
 
