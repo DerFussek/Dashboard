@@ -15,6 +15,21 @@ app.use(cors());
 // Nutze asynchrone Dateisystem-Methoden
 const fsPromises = fs.promises;
 
+const logDir = path.join(__dirname, '..', 'logs');
+const logFile = path.join(logDir, 'error.log');
+
+async function logErrorToFile(err) {
+  try {
+    if (!fs.existsSync(logDir)) {
+      await fsPromises.mkdir(logDir, { recursive: true });
+    }
+    const entry = `[${new Date().toISOString()}] ${err.stack || err.message}\n`;
+    await fsPromises.appendFile(logFile, entry);
+  } catch (logErr) {
+    console.error('Fehler beim Loggen:', logErr.message);
+  }
+}
+
 // Nutzung von Umgebungsvariablen für Flexibilität
 const PORT = process.env.PORT || 3000;
 const apiUrl =
@@ -22,17 +37,13 @@ const apiUrl =
 
 // --- Globale Fehlerbehandlung ---
 // Listener für unhandled Rejections und uncaught Exceptions
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', (reason) => {
   console.error('Unhandled Rejection:', reason);
+  logErrorToFile(reason);
 });
 process.on('uncaughtException', (error) => {
   console.error('Uncaught Exception:', error);
-});
-
-// Globale Error-Handling-Middleware in Express
-app.use((err, req, res, next) => {
-  console.error('Globaler Fehler:', err.message);
-  res.status(500).json({ error: 'Interner Serverfehler' });
+  logErrorToFile(error);
 });
 
 // --- Funktion zum Abruf von Batteriedaten ---
@@ -107,7 +118,9 @@ async function saveData(data) {
 
   try {
     // Wenn die Datei noch nicht existiert, Kopfzeile hinzufügen
-    if (!fs.existsSync(csvFilePath)) {
+    try {
+      await fsPromises.access(csvFilePath);
+    } catch {
       const header =
         'timestamp,production,consumption,battery_charge,battery_discharge,grid_feedin,grid_consumption,battery_state_of_charge,direct_consumption\n';
       await fsPromises.writeFile(csvFilePath, header);
@@ -216,7 +229,9 @@ async function getTotaldata() {
 async function getTodaysData() {
   const csvFilePath = path.join(__dirname, '..', 'data', 'measurements.csv');
   try {
-    if (!fs.existsSync(csvFilePath)) {
+    try {
+      await fsPromises.access(csvFilePath);
+    } catch {
       console.warn(
         `Datei ${csvFilePath} existiert nicht. Erstelle eine neue Datei.`,
       );
@@ -366,15 +381,24 @@ app.get('/struktur', (req, res, next) => {
 app.get('/slides', async (req, res, next) => {
   try {
     const filePath = path.join(__dirname, '..', 'data', 'slides.json');
-    if (!fs.existsSync(filePath)) {
+    try {
+      await fsPromises.access(filePath);
+    } catch {
       return res.status(404).json({ error: 'Slide-Daten nicht gefunden' });
     }
     const data = await fsPromises.readFile(filePath, 'utf-8');
     const json = JSON.parse(data);
     res.json(json);
   } catch (err) {
-    res.status(500).json({ error: 'Fehler beim Lesen der Slide-Daten' });
+    next(err);
   }
+});
+
+// Globale Error-Handling-Middleware in Express
+app.use((err, req, res, next) => {
+  console.error('Globaler Fehler:', err.message);
+  logErrorToFile(err);
+  res.status(err.status || 500).json({ error: 'Interner Serverfehler' });
 });
 
 // ============================================
