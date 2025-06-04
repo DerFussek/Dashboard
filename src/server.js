@@ -1,6 +1,5 @@
 // Importiere benötigte Module
 const express = require('express');
-const request = require('request');
 const axios = require('axios');
 const path = require('path');
 const fs = require('fs');
@@ -18,7 +17,8 @@ const fsPromises = fs.promises;
 
 // Nutzung von Umgebungsvariablen für Flexibilität
 const PORT = process.env.PORT || 3000;
-const apiUrl = process.env.API_URL || 'http://192.168.178.47:8080/api/v1/status';
+const apiUrl =
+  process.env.API_URL || 'http://192.168.178.47:8080/api/v1/status';
 
 // --- Globale Fehlerbehandlung ---
 // Listener für unhandled Rejections und uncaught Exceptions
@@ -31,32 +31,36 @@ process.on('uncaughtException', (error) => {
 
 // Globale Error-Handling-Middleware in Express
 app.use((err, req, res, next) => {
-  console.error("Globaler Fehler:", err.message);
-  res.status(500).json({ error: "Interner Serverfehler" });
+  console.error('Globaler Fehler:', err.message);
+  res.status(500).json({ error: 'Interner Serverfehler' });
 });
 
 // --- Funktion zum Abruf von Batteriedaten ---
 async function getBatteryData() {
   try {
-    console.log("Anfrage für Batteriedaten"); // (z.B. Zeile 14: "Anfrage für Batteriedaten")
+    console.log('Anfrage für Batteriedaten'); // (z.B. Zeile 14: "Anfrage für Batteriedaten")
     const response = await axios.get(apiUrl);
-    console.warn("Sende Daten");
+    console.warn('Sende Daten');
     return response.data;
   } catch (error) {
-    console.error("Fehler bei der Anfrage", error.message);
-    throw new Error('Fehler bei der Anfrage der Batteriedaten: ' + error.message);
+    console.error('Fehler bei der Anfrage', error.message);
+    throw new Error(
+      'Fehler bei der Anfrage der Batteriedaten: ' + error.message,
+    );
   }
 }
 
-getBatteryData().then(data => {
-  console.log("Batteriedaten: ", data);
-}).catch(error => {
-  console.error(error.message);
-});
+getBatteryData()
+  .then((data) => {
+    console.log('Batteriedaten: ', data);
+  })
+  .catch((error) => {
+    console.error(error.message);
+  });
 
 // --- Funktion zum asynchronen Speichern der Daten in eine CSV-Datei ---
 async function saveData(data) {
-  let timestamp = new Date(data.Timestamp).toISOString();  // ISO-Format generieren
+  let timestamp = new Date(data.Timestamp).toISOString(); // ISO-Format generieren
   let production = data.Production_W;
   let consumption = data.Consumption_W;
   let batteryData = data.Pac_total_W;
@@ -91,7 +95,7 @@ async function saveData(data) {
     grid_feedin: grid_feedin,
     grid_consumption: grid_consumption,
     battery_state_of_charge: battery_state_of_charge,
-    direct_consumption: direct_consumption
+    direct_consumption: direct_consumption,
   };
 
   // Falls die Daten kein Array sind, packe sie in ein Array
@@ -104,7 +108,8 @@ async function saveData(data) {
   try {
     // Wenn die Datei noch nicht existiert, Kopfzeile hinzufügen
     if (!fs.existsSync(csvFilePath)) {
-      const header = 'timestamp,production,consumption,battery_charge,battery_discharge,grid_feedin,grid_consumption,battery_state_of_charge,direct_consumption\n';
+      const header =
+        'timestamp,production,consumption,battery_charge,battery_discharge,grid_feedin,grid_consumption,battery_state_of_charge,direct_consumption\n';
       await fsPromises.writeFile(csvFilePath, header);
     }
     // Daten in die CSV-Datei anhängen
@@ -117,7 +122,7 @@ async function saveData(data) {
       await fsPromises.appendFile(csvFilePath, row);
     }
   } catch (err) {
-    console.error("Fehler beim Schreiben der CSV-Datei:", err.message);
+    console.error('Fehler beim Schreiben der CSV-Datei:', err.message);
     throw err;
   }
 }
@@ -146,7 +151,7 @@ async function getJahresdatenFromJSON() {
     const jsonData = await fsPromises.readFile(filePath, 'utf-8');
     return JSON.parse(jsonData);
   } catch (err) {
-    console.error("Fehler beim Einlesen der JSON-Datei:", err.message);
+    console.error('Fehler beim Einlesen der JSON-Datei:', err.message);
     return null;
   }
 }
@@ -158,26 +163,26 @@ async function getDataForYear(year) {
     return [
       jahresdaten[year].production,
       jahresdaten[year].consumption,
-      jahresdaten[year].autarky
+      jahresdaten[year].autarky,
     ];
   }
   return null;
 }
 
 async function getData2022() {
-  return await getDataForYear("2022");
+  return await getDataForYear('2022');
 }
 
 async function getData2023() {
-  return await getDataForYear("2023");
+  return await getDataForYear('2023');
 }
 
 async function getData2024() {
-  return await getDataForYear("2024");
+  return await getDataForYear('2024');
 }
 
 async function getData2025() {
-  return await getDataForYear("2025");
+  return await getDataForYear('2025');
 }
 
 async function getTotaldata() {
@@ -188,19 +193,22 @@ async function getTotaldata() {
     const data2024 = await getData2024();
     const data2025 = await getData2025();
 
-    const totalProduction = data2022[0] + data2023[0] + data2024[0] + data2025[0];
-    const totalConsumption = data2022[1] + data2023[1] + data2024[1] + data2025[1];
-    const avgAutarky = (data2022[2] + data2023[2] + data2024[2] + data2025[2]) / 4;
+    const totalProduction =
+      data2022[0] + data2023[0] + data2024[0] + data2025[0];
+    const totalConsumption =
+      data2022[1] + data2023[1] + data2024[1] + data2025[1];
+    const avgAutarky =
+      (data2022[2] + data2023[2] + data2024[2] + data2025[2]) / 4;
 
     const totalData = {
       production: totalProduction,
       consumption: totalConsumption,
-      autarky: avgAutarky
+      autarky: avgAutarky,
     };
 
     return totalData;
   } else {
-    console.warn("Jahresdaten konnten nicht geladen werden.");
+    console.warn('Jahresdaten konnten nicht geladen werden.');
     return null;
   }
 }
@@ -209,20 +217,26 @@ async function getTodaysData() {
   const csvFilePath = path.join(__dirname, '..', 'data', 'measurements.csv');
   try {
     if (!fs.existsSync(csvFilePath)) {
-      console.warn(`Datei ${csvFilePath} existiert nicht. Erstelle eine neue Datei.`);
-      const header = 'timestamp,production,consumption,battery_charge,battery_discharge,grid_feedin,grid_consumption,battery_state_of_charge,direct_consumption\n';
+      console.warn(
+        `Datei ${csvFilePath} existiert nicht. Erstelle eine neue Datei.`,
+      );
+      const header =
+        'timestamp,production,consumption,battery_charge,battery_discharge,grid_feedin,grid_consumption,battery_state_of_charge,direct_consumption\n';
       await fsPromises.writeFile(csvFilePath, header);
     }
     const data = await fsPromises.readFile(csvFilePath, 'utf-8');
     const lines = data.split('\n');
-    const rows = lines.slice(1).filter(line => line.trim() !== '').map(line => line.split(','));
+    const rows = lines
+      .slice(1)
+      .filter((line) => line.trim() !== '')
+      .map((line) => line.split(','));
 
     let totalProduction = 0;
     let totalConsumption = 0;
     let totalfeedin = 0;
     let totalfeedout = 0;
 
-    rows.forEach(row => {
+    rows.forEach((row) => {
       const production = Number(row[1]);
       const consumption = Number(row[2]);
       const feedin = Number(row[5]);
@@ -244,13 +258,14 @@ async function getTodaysData() {
 
     let newtotalProduction = totalProduction / 1000;
     let newtotalConsumption = totalConsumption / 1000;
-    let newTotalfeedin = (totalfeedin / 60) / 1000;
-    let newTotalfeedout = (totalfeedout / 60) / 1000;
-    let autarkie = (newtotalConsumption - newTotalfeedout) / newtotalConsumption;
+    let newTotalfeedin = totalfeedin / 60 / 1000;
+    let newTotalfeedout = totalfeedout / 60 / 1000;
+    let autarkie =
+      (newtotalConsumption - newTotalfeedout) / newtotalConsumption;
 
     return [newtotalProduction, newtotalConsumption, autarkie];
   } catch (error) {
-    console.error("Fehler beim Laden der CSV-Datei", error.message);
+    console.error('Fehler beim Laden der CSV-Datei', error.message);
     throw new Error('Fehler beim Laden der CSV-Datei: ' + error.message);
   }
 }
@@ -259,10 +274,10 @@ async function getTodaysData() {
 async function initializeData() {
   try {
     const totalDataCache = await getTotaldata();
-    console.log("Data2022:", await getData2022());
-    console.log("Data2023:", await getData2023());
-    console.log("Data2024:", await getData2024());
-    console.log("GesamtData:", totalDataCache);
+    console.log('Data2022:', await getData2022());
+    console.log('Data2023:', await getData2023());
+    console.log('Data2024:', await getData2024());
+    console.log('GesamtData:', totalDataCache);
   } catch (error) {
     console.error('Fehler bei der Initialisierung der Daten:', error.message);
   }
@@ -274,15 +289,11 @@ initializeData();
 // ============================================
 app.get('/getBatteryData', async (req, res, next) => {
   try {
-    request(apiUrl, (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        console.error("Fehler beim Weiterleiten:", error?.message || response.statusCode);
-        return res.status(500).json({ type: 'error', message: error?.message || 'Fehler bei der Batterieanfrage' });
-      }
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.json(JSON.parse(body));
-    });
+    const response = await axios.get(apiUrl);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.json(response.data);
   } catch (err) {
+    console.error('Fehler beim Weiterleiten:', err.message);
     next(err);
   }
 });
@@ -344,9 +355,9 @@ app.get('/todaysData', async (req, res, next) => {
 
 app.get('/struktur', (req, res, next) => {
   try {
-    console.log("Anfrage für statistics.csv");
+    console.log('Anfrage für statistics.csv');
     res.sendFile(path.join(__dirname, '..', 'public', 'Struktur.png'));
-    console.warn("Sende Datei");
+    console.warn('Sende Datei');
   } catch (err) {
     next(err);
   }
