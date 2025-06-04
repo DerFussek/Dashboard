@@ -139,7 +139,7 @@ saveDataJob.start();
 */
 
 // --- Funktionen zum Einlesen der Jahresdaten (JSON) ---
-async function getJahresdatemFromJSON() {
+async function getJahresdatenFromJSON() {
   const filePath = path.join(__dirname, 'daten', 'jahresdaten.json');
   try {
     await fsPromises.access(filePath);
@@ -153,7 +153,7 @@ async function getJahresdatemFromJSON() {
 
 // Allgemeine Funktion, um Daten für ein Jahr abzurufen
 async function getDataForYear(year) {
-  const jahresdaten = await getJahresdatemFromJSON();
+  const jahresdaten = await getJahresdatenFromJSON();
   if (jahresdaten && jahresdaten[year]) {
     return [
       jahresdaten[year].production,
@@ -181,7 +181,7 @@ async function getData2025() {
 }
 
 async function getTotaldata() {
-  const jahresdaten = await getJahresdatemFromJSON();
+  const jahresdaten = await getJahresdatenFromJSON();
   if (jahresdaten) {
     const data2022 = await getData2022();
     const data2023 = await getData2023();
@@ -244,8 +244,8 @@ async function getTodaysData() {
 
     let newtotalProduction = totalProduction / 1000;
     let newtotalConsumption = totalConsumption / 1000;
-    let newTotalfeedin = (totalProduction / 60) / 1000;
-    let newTotalfeedout = totalConsumption / 60;
+    let newTotalfeedin = (totalfeedin / 60) / 1000;
+    let newTotalfeedout = (totalfeedout / 60) / 1000;
     let autarkie = (newtotalConsumption - newTotalfeedout) / newtotalConsumption;
 
     return [newtotalProduction, newtotalConsumption, autarkie];
