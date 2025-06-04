@@ -1,6 +1,5 @@
 // Importiere benötigte Module
 const express = require('express');
-const request = require('request');
 const axios = require('axios');
 const path = require('path');
 const fs = require('fs');
@@ -274,16 +273,12 @@ initializeData();
 // ============================================
 app.get('/getBatteryData', async (req, res, next) => {
   try {
-    request(apiUrl, (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        console.error("Fehler beim Weiterleiten:", error?.message || response.statusCode);
-        return res.status(500).json({ type: 'error', message: error?.message || 'Fehler bei der Batterieanfrage' });
-      }
-      res.setHeader('Access-Control-Allow-Origin', '*');
-      res.json(JSON.parse(body));
-    });
-  } catch (err) {
-    next(err);
+    const response = await axios.get(apiUrl);
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.json(response.data);
+  } catch (error) {
+    console.error("Fehler beim Weiterleiten:", error?.message || error.response?.status);
+    res.status(500).json({ type: 'error', message: error?.message || 'Fehler bei der Batterieanfrage' });
   }
 });
 
