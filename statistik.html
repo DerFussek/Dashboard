@@ -87,7 +87,7 @@
 
 <body>
     <div class="Background" style="left: 0; top: 0%; position: absolute; width: 487.2332px; height: 1040px; background: rgba(191, 172, 226, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex;justify-content: center; overflow: hidden;">
-        <div class="JahresStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 21s linear infinite; ">
+        <div class="JahresStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 30s linear infinite; ">
             <div style="top: 7.5%; position: absolute; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 600; font-size: 32px; color: #ffffff;"><b>2024</b></div>
             <div class="gesProduktion" style="top: 17.5%; width: 150px; height: 150px; position: absolute; background-color: #5b3fb1; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
                 <div class="production-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
@@ -105,7 +105,7 @@
             </div>
         </div>
 
-        <div class="TagesStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 21s linear infinite; animation-delay: 10.5s;">
+        <div class="TagesStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 30s linear infinite; animation-delay: 15s;">
             <div style="top: 7.5%; position: absolute; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 600; font-size: 32px; color: #ffffff;"><b>Heute</b></div>
             <div class="todayProduktion" style="top: 17.5%; width: 150px; height: 150px; position: absolute; background-color: #5b3fb1; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
                 <div class="todays-production-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
@@ -127,12 +127,20 @@
 
     <script>    
         async function fetchDataToday() {
-            const response = await fetch('http://dashboard:3000/measurements.csv');
-            const data = await response.text();
-            return data;
+            try {
+                const response = await fetch('http://localhost:3000/measurements.csv');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.text();
+                return data;
+            } catch (error) {
+                console.error("Fehler beim Abrufen der Daten:", error);
+                // Optional: Zeige eine Fehlermeldung im HTML an, um dem Benutzer zu signalisieren, dass etwas schiefgelaufen ist
+            }
         }
     
-        function calcProConToday(data) {
+        async function calcProConToday(data) {
             const lines = data.split('\n');
             const rows = lines.slice(1).map(line => line.split(','));
     
@@ -163,7 +171,7 @@
             };
         }
 
-        function calcAutarkieToday(data) {
+        async function calcAutarkieToday(data) {
             const lines = data.split('\n');
             const rows = lines.slice(1).map(line => line.split(','));
 
@@ -207,12 +215,20 @@
         }
     
         async function fetchData2024() {
-            const response = await fetch('http://dashboard:3000/statistics/statistics.csv');
-            const data = await response.text();
-            return data;
+            try {
+                const response = await fetch('http://localhost:3000/statistics/statistics.csv');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const data = await response.text();
+                return data;
+            } catch (error) {
+                console.error("Fehler beim Abrufen der Daten:", error);
+                // Optional: Zeige eine Fehlermeldung im HTML an, um dem Benutzer zu signalisieren, dass etwas schiefgelaufen ist
+            }
         }
     
-        function calcProCon2024(data) {
+        async function calcProCon2024(data) {
             const lines = data.split('\n');
             const rows = lines.slice(1).map(line => line.split(','));
     
@@ -244,7 +260,7 @@
             };
         }
 
-        function calcAutarkie2024(data) {
+        async function calcAutarkie2024(data) {
             const lines = data.split('\n');
             const rows = lines.slice(1).map(line => line.split(','));
 
@@ -298,7 +314,38 @@
     
         }
     
-        window.onload = setInterval(loadAndDisplayData, 5000);
+        
+
+        async function executeEveryMinute() {
+            setTimeout(() => {
+                loadAndDisplayData();
+            }, 1350);
+        }
+
+        async function startClock() {
+            let lastMinute = new Date().getMinutes(); // Aktuelle Sekunde zu Beginn speichern
+
+            function checkTime() {
+                const now = new Date();
+                const currentMinute = now.getMinutes();
+
+                // Wenn sich die Sekunde geändert hat, wird die Funktion aufgerufen
+                if (currentMinute !== lastMinute) {
+                    lastMinute = currentMinute;
+                    executeEveryMinute();
+                }
+
+                requestAnimationFrame(checkTime); // Nächste Ausführung planen
+            }
+
+            checkTime(); // Startet die Schleife
+        }
+
+        window.onload = function() {
+            executeEveryMinute();
+            startClock();
+        }
+
     </script>
     
 </body>

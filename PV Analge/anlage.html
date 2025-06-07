@@ -88,10 +88,10 @@
     transform: translateY(-5px) translateX(55px);
   }
   50% {
-    transform: translateY(104px) translateX(55px); /* Ende der vertikalen Linie */
+    transform: translateY(109px) translateX(55px); /* Ende der vertikalen Linie */
   }
   100% {
-    transform: translateY(104px) translateX(0); /* Bewegung nach links entlang der horizontalen Linie */
+    transform: translateY(109px) translateX(0); /* Bewegung nach links entlang der horizontalen Linie */
   }
 }
 
@@ -175,18 +175,17 @@
           <div class="PvNetz" style="width: 59px; height: 108px; left: 0px; top: 1px; position: absolute;">
             <div class="PvNetz1" style="width: 4px; height: 108px; left: 55px; top: 0px; position: absolute; background: #FFFFFF"></div>
             <div class="PvNetz2" style="width: 55px; height: 4px; left: 0px; top: 104px; position: absolute; background: #FFFFFF"></div>
-            <div id = "PN1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: PvNetz 2s linear infinite; animation-delay: 0s;"> </div>
-            <div id = "PN2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: PvNetz 2s linear infinite; animation-delay: 0.5s;"> </div>
-            <div id = "PN3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: PvNetz 2s linear infinite; animation-delay: 1s;"> </div>
-            <div id = "PN4" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: PvNetz 2s linear infinite; animation-delay: 1.5s;"> </div>
+            <div id = "PN1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvNetz 2s linear infinite; animation-delay: 0s;"> </div>
+            <div id = "PN2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvNetz 2s linear infinite; animation-delay: 0.5s;"> </div>
+            <div id = "PN3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvNetz 2s linear infinite; animation-delay: 1s;"> </div>
+            <div id = "PN4" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvNetz 2s linear infinite; animation-delay: 1.5s;"> </div>
           </div>
 
           <div class="NetzBatterieOn" style="width: 130px; height: 4px; left: 0px; top: 114px; position: absolute; background: #ffffff">
             <div class="NetzBatterieAnimation">
-              <div id = "NB1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: NetzBatterie 2s linear infinite;"> </div>
-              <div id = "NB2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -8px; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 0.5s;"> </div>
-              <div id = "NB3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -16px; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 1s;"> </div>
-              <div id = "NB4" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -24px; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 1.5s;"> </div>
+              <div id = "NB1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 0s;"> </div>
+              <div id = "NB2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0px; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 600ms;"> </div>
+              <div id = "NB3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0px; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 1200ms;"> </div>
             </div>
 
             <div class="PVHaus" style="width: 4px; height: 231px; left: 63px; top: -113px; position: absolute; background: #ffffff">
@@ -268,21 +267,12 @@
     </div>  
     <script>
       let newestData;  // Globale Variable für die neuesten Daten
-        window.onload = function() {           
-          setInterval(() => {
-            if (shouldSaveData()) {
-                sendDataToServer(newestData);  // Beispiel-Daten an den Server senden
-            }
-          }, 1000);
+      let Data2024;
+      let Data2023_2022
 
-          setInterval(FetchData, 5000);
-          AnimationBatterieHaus(true);
-          AnimationNetzBatterie(true);
-          AnimationNetzHaushalt(true);
-        }
 
         function FetchData() {
-          const url = "http://dashboard:3000/getBatteryData";
+          const url = "http://localhost:3000/getBatteryData";
           fetch(url, {
             method: "GET",
             headers: {
@@ -302,22 +292,11 @@
               Batterie(data.USOC, data.Pac_total_W);
               updateAnimations(data);
               loadAndDisplayData();
-              gesPro
               newestData = data;  // Speichere die Daten in der globalen Variable
           })
           .catch(error => {
               console.error("Es gab ein Problem mit der Fetch-Anfrage:", error);
           });
-        }
-
-        function shouldSaveData() {
-            const now = new Date();
-            const seconds = now.getSeconds();
-            const minutes = now.getMinutes();
-            const hours = now.getHours();
-
-            if(seconds == 0) return true;
-            else return false;
         }
 
         function sendDataToServer(data) {
@@ -361,7 +340,7 @@
           };
           
 
-          fetch('http://dashboard:3000/save', {
+          fetch('http://localhost:3000/save', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -518,24 +497,20 @@
             document.getElementById('NB1').style.animationPlayState = 'running';
             document.getElementById('NB2').style.animationPlayState = 'running';
             document.getElementById('NB3').style.animationPlayState = 'running';
-            document.getElementById('NB4').style.animationPlayState = 'running';
 
             document.getElementById('NB1').style.background = colorOnCircles;
             document.getElementById('NB2').style.background = colorOnCircles;
             document.getElementById('NB3').style.background = colorOnCircles;
-            document.getElementById('NB4').style.background = colorOnCircles;
 
           } else if(!status) {
             document.querySelector('.NetzBatterieOn').style.backgroundColor = colorOFF;
             document.getElementById('NB1').style.animationPlayState = 'paused';
             document.getElementById('NB2').style.animationPlayState = 'paused';
             document.getElementById('NB3').style.animationPlayState = 'paused';
-            document.getElementById('NB4').style.animationPlayState = 'paused';
             
             document.getElementById('NB1').style.background = colorOffCircles;
             document.getElementById('NB2').style.background = colorOffCircles;
             document.getElementById('NB3').style.background = colorOffCircles;
-            document.getElementById('NB4').style.background = colorOffCircles;
 
           }    
         }
@@ -708,8 +683,6 @@
           }
         }
 
-    </script>
-    <script>
       let heute;
       let diesesJahr;
       let dieLetztenJahre;
@@ -735,7 +708,7 @@
       }
   
       async function fetchDataToday() {
-          const response = await fetch('http://dashboard:3000/measurements.csv');
+          const response = await fetch('http://localhost:3000/measurements.csv');
           const data = await response.text();
           return data;
       }
@@ -786,12 +759,12 @@
       }
   
       async function fetchData2024() {
-          const response = await fetch('http://dashboard:3000/statistics/statistics.csv');
+          const response = await fetch('http://localhost:3000/statistics/statistics.csv');
           const data = await response.text();
           return data;
       }
   
-      function calcProCon2024(data) {
+      async function calcProCon2024(data) {
           const lines = data.split('\n');
           const rows = lines.slice(1).map(line => line.split(','));
   
@@ -827,7 +800,7 @@
           let newtotalConsumption = ((totalConsumption)/1000);
           let newTotalfeedin = (((totalProduction)/60)/1000);
           let newTotalfeedout =(((totalConsumption)/60));
-
+    
           return {
               thisYearProd: newtotalProduction,
               thisYearCons: newtotalConsumption,
@@ -837,18 +810,18 @@
       }
   
       async function fetchData2023() {
-          const response = await fetch('http://dashboard:3000/statistics/2023.csv');
+          const response = await fetch('http://localhost:3000/statistics/2023.csv');
           const data2023 = await response.text();
           return data2023;
       }
   
       async function fetchData2022() {
-          const response = await fetch('http://dashboard:3000/statistics/2022.csv');
+          const response = await fetch('http://localhost:3000/statistics/2022.csv');
           const data2022 = await response.text();
           return data2022;
       }
   
-      function calcProCon2023_2022(data2023, data2022) {
+      async function calcProCon2023_2022(data2023, data2022) {
           const lines2023 = data2023.split('\n');
           const rows2023 = lines2023.slice(1).map(line => line.split(','));
   
@@ -922,18 +895,73 @@
       async function loadAndDisplayData() {
           const dataToday = await fetchDataToday();
           heute = calcProConToday(dataToday);
-  
-          const data2024 = await fetchData2024();
-          diesesJahr = calcProCon2024(data2024);
-  
-          const data2023 = await fetchData2023();
-          const data2022 = await fetchData2022();
-          dieLetztenJahre = calcProCon2023_2022(data2023, data2022);
-  
-          produktionAllTime(heute, diesesJahr, dieLetztenJahre);
+          produktionAllTime(heute, Data2024, Data2023_2022);
       }
   
 
+      async function executeEveryMinute() {
+          setTimeout(() => {
+              sendDataToServer(newestData);
+              loadAndDisplayData();
+          }, 7350);
+      }
+
+      async function executeEveryHour() {
+          setTimeout(async () => {
+            const data2024 = await fetchData2024();
+            Data2024 = await calcProCon2024(data2024);
+            const data2023 = await fetchData2023();
+            const data2022 = await fetchData2022();
+
+            Data2023_2022 = await calcProCon2023_2022(data2023, data2022);
+          }, 16350);
+      }
+
+      async function executeEvery5Seconds() {
+        newestData = FetchData();
+      }
+        
+        
+        async function startClock() {
+            let lastMinute = new Date().getMinutes();
+            let lastHour = new Date().getHours(); // Aktuelle Sekunde zu Beginn speichern
+            let lastSecond = new Date().getSeconds();
+
+            function checkTime() {
+                const now = new Date();
+                const currentMinute = now.getMinutes();
+                const currentHour = now.getHours();
+                const currentSecond = now.getSeconds();
+
+                // Wenn sich die Sekunde geändert hat, wird die Funktion aufgerufen
+                if (currentMinute !== lastMinute) {
+                    lastMinute = currentMinute;
+                    executeEveryMinute();
+                }
+
+                if (currentHour !== lastHour) {
+                    lastHour = currentHour;
+                    executeEveryHour();
+                }
+
+                if(currentSecond !== lastSecond) {
+                  if(currentSecond % 5 === 0) {
+                    executeEvery5Seconds();
+                  }
+                  lastSecond = currentSecond;    
+                }
+
+                requestAnimationFrame(checkTime); // Nächste Ausführung planen
+            }
+
+            checkTime(); // Startet die Schleife
+        }
+        window.onload = function() {
+          executeEveryMinute();
+          executeEveryHour();
+          
+          startClock();
+        }
   </script>
   </body>
 </html>
