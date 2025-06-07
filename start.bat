@@ -1,1 +1,2 @@
-start "" node src/server.js
+start "" node index.js
+start "Electron/Dashboard" electron dashboard.html
