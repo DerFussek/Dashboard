@@ -293,6 +293,20 @@ async function initializeData() {
 // ============================================
 //             Proxy - Aufgaben
 // ============================================
+app.get('/', async (req, res, next) => {
+  try {
+    const filePath = path.join(__dirname, '..', 'public', 'dashboard.html');
+    try {
+      await fsPromises.access(filePath);
+    } catch {
+      return res.status(404).json({ error: 'dashboard.html not found' });
+    }
+    
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get('/getBatteryData', async (req, res, next) => {
   try {
     const response = await axios.get(apiUrl);
