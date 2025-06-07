@@ -1,0 +1,1006 @@
+<html>
+  <head>
+    <style>
+      @font-face {
+        font-family: 'Pally-Regular';
+        src: url('/fonts/Pally-Regular.woff2') format('woff2'),
+            url('/fonts/Pally-Regular.woff') format('woff'),
+            url('/fonts/Pally-Regular.ttf') format('truetype');
+        font-weight: 400;
+        font-display: swap;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Pally-Medium';
+        src: url('/fonts/Pally-Medium.woff2') format('woff2'),
+            url('/fonts/Pally-Medium.woff') format('woff'),
+            url('/fonts/Pally-Medium.ttf') format('truetype');
+        font-weight: 500;
+        font-display: swap;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Pally-Bold';
+        src: url('/fonts/Pally-Bold.woff2') format('woff2'),
+            url('/fonts/Pally-Bold.woff') format('woff'),
+            url('/fonts/Pally-Bold.ttf') format('truetype');
+        font-weight: 700;
+        font-display: swap;
+        font-style: normal;
+      }
+      @font-face {
+        font-family: 'Pally-Variable';
+        src: url('/fonts/Pally-Variable.woff2') format('woff2'),
+            url('/fonts/Pally-Variable.woff') format('woff'),
+            url('/fonts/Pally-Variable.ttf') format('truetype');
+        font-weight: 400 700;
+        font-display: swap;
+        font-style: normal;
+      }
+
+      .font-regular {
+        font-family: 'Pally-Regular', sans-serif;
+        font-weight: 400;
+        }
+
+    .font-medium {
+        font-family: 'Pally-Medium', sans-serif;
+        font-weight: 500;
+    }
+
+    .font-bold {
+        font-family: 'Pally-Bold', sans-serif;
+        font-weight: 700;
+    }
+
+    .font-variable {
+        font-family: 'Pally-Variable', sans-serif;
+    }
+
+    @keyframes NetzBatterie {
+      from {
+          left: -5; /* Startet von der linken Seite */
+      }
+      to {
+          left: 100%; /* Bewegt sich bis zur rechten Seite */
+      }
+    }
+
+    @keyframes PvHaus {
+      from {
+          top: -5; /* Startet von der linken Seite */
+      }
+      to {
+          top: 100%; /* Bewegt sich bis zur rechten Seite */
+      }
+    }
+    
+    @keyframes PvBatterie {
+      0% {
+        top: -5;
+        left: 0;
+      }
+      50% {
+          top: 104px; /* Bewegt sich bis zur unteren Ecke */
+          left: 0;
+      }
+      /* 50% bis 100%: Bewegung von links nach rechts */
+      100% {
+          top: 104px; /* Bleibt unten */
+          left: 55px; /* Bewegt sich nach rechts */
+      }
+    }
+
+    /* Animation für L-förmige Bewegung im NetzHaushalt */
+    @keyframes NetzHaushalt {
+        /* 0% bis 50%: Bewegung von oben nach unten */
+        0% {
+            top: 0;
+            left: -5px;
+        }
+        50% {
+            top: 0px; /* Bewegt sich bis zum Ende der vertikalen Linie */
+            left: 55px;
+        }
+        /* 50% bis 100%: Bewegung von links nach rechts */
+        100% {
+            top: 108px; /* Bleibt unten */
+            left: 55px; /* Bewegt sich nach links entlang der horizontalen Linie */
+        }
+    }
+
+    @keyframes PvNetz {
+        /* 0% bis 50%: Bewegung von oben nach unten */
+        0% {
+            top: -5;
+            left: 55px;
+        }
+        50% {
+            top: 104px; /* Bewegt sich bis zum Ende der vertikalen Linie */
+            left: 55px;
+        }
+        /* 50% bis 100%: Bewegung von links nach rechts */
+        100% {
+            top: 104px; /* Bleibt unten */
+            left: 0px; /* Bewegt sich nach links entlang der horizontalen Linie */
+        }
+    }
+
+    @keyframes BatterieHaus {
+        /* 0% bis 50%: Bewegung von oben nach unten */
+        0% {
+            top: 0;
+            left: 60px;
+        }
+        50% {
+            top: 0px; /* Bewegt sich bis zum Ende der vertikalen Linie */
+            left: 0px;
+        }
+        /* 50% bis 100%: Bewegung von links nach rechts */
+        100% {
+            top: 104px; /* Bleibt unten */
+            left: 0px; /* Bewegt sich nach links entlang der horizontalen Linie */
+        }
+    }
+
+    @keyframes Switch_Main_Info {
+            0% {
+                left: 763.332px;  /* Start bei 300px */
+            }
+            4.55% {
+                left: 0px;  /* Bewegung von 300px nach 0px in 0.5 Sekunden */
+            }
+            50% {
+                left: 0px;  /* Pause für 10 Sekunden bei 0px */
+            }
+            54.55% {
+                left: -763.332px;  /* Bewegung von 0px nach -300px in 0.5 Sekunden */
+            }
+            100% {
+                left: -763.333px;  /* Pause für 10 Sekunden bei -300px */
+            }
+        }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="Anlage" style="left: 0; top: 0px; position: absolute; width: 763.332px; height: 1040px; background: rgba(0, 0, 0, 0); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center;"> 
+      <div class="PV-Gesamt" style="left: 0; top: 0px; position: absolute; width: 763.332px; height: 240px; background: rgba(91, 63, 177, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;">  
+        <div class="PV-Name" style="left: 763.332px; top: 0px; position: absolute; width: 763.332px; height: 240px; background: rgba(0, 0, 0, 0); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center;  animation: Switch_Main_Info 21s linear infinite;">
+          <div style="font-family: 'Pally-Bold', sans-serif; font-size: 70px; font-weight: 600; text-align: center; color: white;">Pv-Anlage 03.2022</div>
+          <div id="gesProduktion" style="font-family: 'Pally-Bold', sans-serif; font-size: 35px; font-weight: 400; text-align: center; color: white;">Gesamtproduktion: 16000kW</div>
+        </div>  
+        
+        <div class="PV-Infos" style="left: 763.332px; top: 0px; position: absolute; width: 763.332px; height: 240px; background: rgba(255, 255, 255, 0); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center;  animation: Switch_Main_Info 21s linear infinite; animation-delay: 10.5s;"> 
+            <div class="gesProduktion" style="top: 20px; width: 200px; height: 200px; position: absolute; background-color: #5b3fb1; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 32px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+              <div class="gesProduktionIngWh" style="font-family: 'Pally-Bold', sans-serif; font-size: 42px; font-weight: 600;"><b>00.0GkWh</b></div>
+              <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 18px; color: #ffffff;">~Produktion</div>
+            </div>
+
+            <div class="gesVerbrauch" style="top: 20px; left:35px; width: 200px; height: 200px; position: absolute; background-color: #8696FE; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 32px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+              <div class="gesConsIngWh" style="font-family: 'Pally-Bold', sans-serif; font-size: 42px; font-weight: 600;"><b>00.0GWh</b></div>
+              <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 18px; color: #ffffff;">~Verbrauch</div>
+            </div>
+            
+            <div class="gesAutarkie" style="top: 20px; left: 520px; width: 200px; height: 200px; position: absolute; background-color: #8e9add; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 32px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+              <div class="gesAutpercenz" style="font-family: 'Pally-Bold', sans-serif; font-size: 42px; font-weight: 600;"><b>100%</b></div>
+              <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 18px; color: #ffffff;">~Autarkie</div>
+            </div>
+          </div>  
+
+      </div>
+      <div class="PV-Uebersicht" style="left: 0; top: 275px; position: absolute; width: 763.332px; height: 765px; background: rgba(196, 176, 255, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <div class="Kreuz" style="left: 316.5px; top: 285px; position: absolute; width: 130px; height: 231px; transform: scale(1.7214);">
+          <div class="BatterieHaus" style="width: 59px; height: 108px; left: 71px; top: 123px; position: absolute">
+            <div class="BatterieHaus1" style="width: 4px; height: 108px; left: 0px; top: 0px; position: absolute; background: #FFFFFF"></div>
+            <div class="BatterieHaus2" style="width: 55px; height: 4px; left: 4px; top: 0px; position: absolute; background: #FFFFFF"></div>
+            <div id="BH1" style="width: 4px; height: 4px; background: #ffffff; border-radius: 50%; position: absolute; left: 60px; top: 0px; animation: BatterieHaus 2s linear infinite; animation-delay: 0s;"></div>
+            <div id="BH2" style="width: 4px; height: 4px; background: #ffffff; border-radius: 50%; position: absolute; left: 60px; top: 0px; animation: BatterieHaus 2s linear infinite; animation-delay: 0.5s;"></div>
+            <div id="BH3" style="width: 4px; height: 4px; background: #ffffff; border-radius: 50%; position: absolute; left: 60px; top: 0px; animation: BatterieHaus 2s linear infinite; animation-delay: 1s;"></div>
+            <div id="BH4" style="width: 4px; height: 4px; background: #ffffff; border-radius: 50%; position: absolute; left: 60px; top: 0px; animation: BatterieHaus 2s linear infinite; animation-delay: 2.5s;"></div>
+          </div>
+
+          <div class="NetzHaushalt" style="width: 59px; height: 108px; left: 0px; top: 123px; position: absolute">
+            <div class="NetzHaushalt1" style="width: 4px; height: 108px; left: 55px; top: 0px; position: absolute; background: #FFFFFF"></div>
+            <div class="NetzHaushalt2" style="width: 55px; height: 4px; left: 0px; top: 0px; position: absolute; background: #FFFFFF"></div>
+            <div id="NH1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -5px; top: 0px; animation: NetzHaushalt 2s linear infinite; animation-delay: 0s;"></div>
+            <div id="NH2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -5px; top: 0px; animation: NetzHaushalt 2s linear infinite; animation-delay: 0.5s;"></div>
+            <div id="NH3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -5px; top: 0px; animation: NetzHaushalt 2s linear infinite; animation-delay: 1s;"></div>
+            <div id="NH4" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -5px; top: 0px; animation: NetzHaushalt 2s linear infinite; animation-delay: 1.5s;"></div>
+          </div>
+
+          <div class="PvBatterie" style="width: 59px; height: 108px; left: 71px; top: 1px; position: absolute">
+            <div class="PvBatterie1" style="width: 4px; height: 108px; left: 0px; top: 0px; position: absolute; background: #FFFFFF"></div>
+            <div class="PvBatterie2" style="width: 55px; height: 4px; left: 4px; top: 104px; position: absolute; background: #FFFFFF"></div>
+            <div id = "PB1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvBatterie 2s linear infinite; animation-delay: 0s;"> </div>
+            <div id = "PB2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvBatterie 2s linear infinite; animation-delay: 0.5s;"> </div>
+            <div id = "PB3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvBatterie 2s linear infinite; animation-delay: 1s;"> </div>
+            <div id = "PB4" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvBatterie 2s linear infinite; animation-delay: 1.5s;"> </div>
+          </div>
+
+          <div class="PvNetz" style="width: 59px; height: 108px; left: 0px; top: 1px; position: absolute;">
+            <div class="PvNetz1" style="width: 4px; height: 108px; left: 55px; top: 0px; position: absolute; background: #FFFFFF"></div>
+            <div class="PvNetz2" style="width: 55px; height: 4px; left: 0px; top: 104px; position: absolute; background: #FFFFFF"></div>
+            <div id = "PN1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: PvNetz 2s linear infinite; animation-delay: 0s;"> </div>
+            <div id = "PN2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: PvNetz 2s linear infinite; animation-delay: 0.5s;"> </div>
+            <div id = "PN3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: PvNetz 2s linear infinite; animation-delay: 1s;"> </div>
+            <div id = "PN4" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: PvNetz 2s linear infinite; animation-delay: 1.5s;"> </div>
+          </div>
+
+          <div class="NetzBatterieOn" style="width: 130px; height: 4px; left: 0px; top: 114px; position: absolute; background: #ffffff">
+            <div class="NetzBatterieAnimation">
+              <div id = "NB1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: 0px; animation: NetzBatterie 2s linear infinite;"> </div>
+              <div id = "NB2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -8px; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 0.5s;"> </div>
+              <div id = "NB3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -16px; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 1s;"> </div>
+              <div id = "NB4" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: -24px; top: 0px; animation: NetzBatterie 2s linear infinite; animation-delay: 1.5s;"> </div>
+            </div>
+
+            <div class="PVHaus" style="width: 4px; height: 231px; left: 63px; top: -113px; position: absolute; background: #ffffff">
+              <div class="PvBatterieAnimation">
+                <div id = "PH1" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvHaus 4s linear infinite; animation-delay: 0s;"> </div>
+                <div id = "PH2" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvHaus 4s linear infinite; animation-delay: 1s;"> </div>
+                <div id = "PH3" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvHaus 4s linear infinite; animation-delay: 2s;"> </div>
+                <div id = "PH4" style="width: 4px; height: 4px; background: #FFFFFF; border-radius: 50%; position: absolute; left: 0; top: -5px; animation: PvHaus 4s linear infinite; animation-delay: 3s;"> </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="PvAnlage" style=" left: 167.5px; top: 60px; position: absolute; width: 426px; height: 106px; transform: scale(1.7214);">
+          <div class="Hintergrund" style="width: 426px; height: 106px; background: #3a33b3; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 22px; position: relative;">
+            <div class="PvAnlageText" style="left: 21px; top: 9px; position: absolute; color: #FFFFFF; font-size: 16px; font-family: 'Pally-Va', sans-serif; font-weight: 900; word-wrap: break-word"><b>PV Anlage</b></div>
+            <div class="Produktion" style="width: 66px; height: 37px; left: 18px; top: 62px; position: absolute">
+              <div class="Kw" style="left: 40px; top: 9px; position: absolute; color: #FFFFFF; font-size: 14px; font-family: 'Pally-Regular', sans-serif; font-weight: 700; word-wrap: break-word"><b>kW</div>
+              <div class="ProduktionText" style="left: 3px; top: 24px; position: absolute; color: #FFFFFF; font-size: 11px; font-family: 'Pally-Variable', sans-serif; font-weight: 500; word-wrap: break-word">Produktion</div>
+              <div id="PVProduktion" style="width: 66px; height: 21px; left: 0px; top: -4.5px; position: absolute; color: #FFFFFF; font-size: 24px; font-family: 'Pally-Bold', sans-serif; font-weight: 900; word-wrap: break-word"><b>err</b></div>
+            </div>
+            <img class="Solaricon" style="width: 22px; height: 22px; left: 394px; top: 6px; position: absolute" src="PV-Anlage/PV_White.png" />
+            <div class="Diagramm" style="width: 75px; height: 61.25px; left: 312px; top: 35.75px; position: absolute">
+              <div class="Rectangle3" style="width: 6.25px; height: 13.75px; left: 0px; top: 47.50px; position: absolute; background: #D9D9D9; border-radius: 32px"></div>
+              <div class="Rectangle12" style="width: 1.25px; height: 42.50px; left: 71.25px; top: 11.25px; position: absolute; background: white; border-radius: 32px"></div>
+              <div class="Rectangle4" style="width: 6.25px; height: 23.75px; left: 8.75px; top: 37.50px; position: absolute; background: #C2BDBD; border-radius: 32px"></div>
+              <div class="Rectangle5" style="width: 6.25px; height: 35px; left: 17.50px; top: 26.25px; position: absolute; background: #AAAAAA; border-radius: 32px"></div>
+              <div class="Rectangle6" style="width: 6.25px; height: 22.50px; left: 26.25px; top: 38.75px; position: absolute; background: #959595; border-radius: 32px"></div>
+              <div class="Rectangle7" style="width: 6.25px; height: 16.25px; left: 35px; top: 45px; position: absolute; background: #878787; border-radius: 32px"></div>
+              <div class="Rectangle8" style="width: 6.25px; height: 25px; left: 43.75px; top: 36.25px; position: absolute; background: #757575; border-radius: 32px"></div>
+              <div class="Rectangle9" style="width: 6.25px; height: 23.75px; left: 52.50px; top: 37.50px; position: absolute; background: #555555; border-radius: 32px"></div>
+              <div class="Rectangle10" style="width: 6.25px; height: 11.25px; left: 60px; top: 50px; position: absolute; background: #403F3F; border-radius: 32px"></div>
+              <div class="Rectangle11" style="width: 6.25px; height: 6.25px; left: 68.75px; top: 55px; position: absolute; background: black; border-radius: 32px"></div>
+              <div class="Rectangle13" style="width: 61.25px; height: 12.50px; left: 11.25px; top: 0px; position: absolute; background: #FFF6F6; border-radius: 2px"></div>
+              <div class="DieseStunde" style="width: 57.50px; height: 10px; left: 16px; top: 2px; position: absolute; color: black; font-size: 8px; font-family: 'Pally-Regular', sans-serif; font-weight: 700; word-wrap: break-word">Diese Stunde</div>
+            </div>
+          </div>
+        </div>
+
+
+        
+        <div class="Netz" style="left: 68.5px; top: 307.5px; position: absolute; width: 148px; height: 188px; background: #4942E4; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 22px; transform: scale(1.7214);">
+          <div class="top-content" style="display: flex; justify-content: space-between; width: 100%;">
+            <div class="Ueberschriftnetz" style="left: 11px; top: 10px; position: absolute; color: #ffffff; font-size: 16px; font-family: 'Pally-Bold', sans-serif; font-weight: 900;"><b>Netz</b></div>
+            <img src="Netz/Turm.png" alt="Strommast-Symbol" style="left: 112.5px; top: 5.5px; position: absolute; width: 25px; height: 25px; color: white;">
+          </div>
+          
+          <div class="bottom-content" style="left: -20px; top: -20px; position: absolute; text-align: center; color: #ffffff;">
+            <div id="Netzbezug" style="left: 32px; top: 153px; position: absolute; font-size: 24px; font-family: 'Pally-Bold', sans-serif; font-weight: 900;"><b>err<b></div>
+              <div class="Kw" style="left: 73px; top: 166.5px; position: absolute; color: #ffffff; font-size: 14px; font-family: 'Pally-Regular', sans-serif; font-weight: 700; word-wrap: break-word"><b>kW</div>
+            <div class="NetzbezugText" style="left: 33px; top: 180px; position: absolute; font-size: 11px; font-family: 'Pally-Variable', sans-serif; font-weight: 500;">Netzbezug</div>
+          </div>
+        </div>
+        
+        <div class="Batterie" style="left: 554px; top: 315px; width: 148px; height: 188px; position: absolute; display: flex; flex-direction: column; justify-content: space-between; padding: 10px; transform: scale(1.7214);">
+          <div class="Rectangle15" style="width: 148px; height: 188px; left: 0px; top: 0px; position: absolute; background: rgba(102.77, 114.15, 147.69, 0.61); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 22px; overflow: hidden;">
+            <div class="Rectangle16" style="width: 148px; height: 77px; left: 0px; top: 111px; position: absolute; transform: rotate(180deg); background: rgba(0, 64.65, 255, 0.61); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);"></div>
+          </div>
+          <div class="Prozent" style="left: 11px; top: 27px; position: absolute; color: white; font-size: 11px; font-family: 'Pally-Variable', sans-serif; font-weight: 500; word-wrap: break-word">0%</div>
+          <div class="Batterie" style="left: 11px; top: 10px; position: absolute; color: white; font-size: 16px; font-family: 'Pally-Bold', sans-serif; font-weight: 900; word-wrap: break-word"><b>Batterie</b></div>
+          <img class="Image3" style="width: 24px; height: 22px; left: 114px; top: 5px; position: absolute; transform: rotate(0deg); transform-origin: 0 0" src="Batterie/Batterie.png" />
+          <div class="Batterieladung" style="width: 66px; height: 37px; left: 11px; top: 134px; position: absolute">
+            <div class="KW" style="left: 40px; top: 9.5px; position: absolute; color: white; font-size: 14px; font-family: 'Pally-Regular', sans-serif; font-weight: 700; word-wrap: break-word">kW</div>
+            <div class="EntlDt" style="left: 0px; top: 24px; position: absolute; color: white; font-size: 11px; font-family: 'Pally-Variable', sans-serif; font-weight: 500; word-wrap: break-word">Entlädt</div>
+            <div class="BatterieKW" style="width: 66px; height: 21px; left: 0px; top: -4.5px; position: absolute; color: white; font-size: 24px; font-family: 'Pally-Bold', sans-serif; font-weight: 900; word-wrap: break-word"><b>0.4</b></div>
+          </div>
+        </div>
+
+        <div class="Haushalt" style="left: 167.5px; top: 625px; width: 426px; height: 79px; position: absolute; transform: scale(1.7214);">
+          <div class="Rectangle17" style="width: 426px; height: 79px; left: 0px; top: 0px; position: absolute; background: #8696FE; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 22px"></div>
+          <div id="Haushalt_Verbrauch_Kw" style="width: 66px; height: 21px; left: 342px; top: 25px; position: absolute; color: #ffffff; font-size: 24px; font-family: 'Pally-Bold', sans-serif; font-weight: 900; word-wrap: break-word"><b>0.0</b></div>
+          <div class="Kw" style="left: 383px; top: 38.5px; position: absolute; color: #ffffff; font-size: 14px; font-family: 'Pally-Regular', sans-serif; font-weight: 700; word-wrap: break-word">kW</div>
+          <div class="Verbrauch" style="left: 56px; top: 43px; position: absolute; color: #ffffff; font-size: 11px; font-family: 'Pally-Variable', sans-serif; font-weight: 500; word-wrap: break-word">Verbrauch</div>
+          <img class="Image4" style="width: 38px; height: 38px; left: 8px; top: 21px; position: absolute" src="Haushalt/Haus.png" />
+          <div class="Haushalt" style="left: 56px; top: 24px; position: absolute; color: #ffffff; font-size: 16px; font-family: 'Pally-Bold', sans-serif; font-weight: 900; word-wrap: break-word"><b>Haushalt</b></div>
+        </div>
+      </div>
+    </div>  
+    <script>
+      let newestData;  // Globale Variable für die neuesten Daten
+        window.onload = function() { 
+          AnimationNetzBatterie(true);
+          AnimationPvAnlageHaushalt(true);
+          AnimationPvBatterie(true);
+          AnimationNetzHaushalt(true);
+          AnimationPvNetz(true);
+          AnimationBatterieHaus(true);
+
+          
+          setInterval(FetchData, 5000);
+
+          setInterval(() => {
+            if (shouldSaveData()) {
+                sendDataToServer(newestData);  // Beispiel-Daten an den Server senden
+            }
+          }, 1000);
+
+          setInterval(loadAndDisplayData, 5000);
+        }
+        
+        
+        function FetchData() {
+          const url = "http://dashboard:3000/getBatteryData";
+          fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error("Netzwerk-Antwort war nicht in Ordnung.");
+              }
+              return response.json();
+          })
+          .then(data => {
+              HaushaltVerbrauch(Math.abs((data.Consumption_W / 1000).toFixed(1)));
+              PVProduktion((data.Production_W / 1000).toFixed(1));
+              Netzbezug(data.GridFeedIn_W);
+              Batterie(data.USOC, data.Pac_total_W);
+              updateAnimations(data);
+              
+              newestData = data;  // Speichere die Daten in der globalen Variable
+          })
+          .catch(error => {
+              console.error("Es gab ein Problem mit der Fetch-Anfrage:", error);
+          });
+        }
+
+        function shouldSaveData() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours();
+
+            if(seconds == 0) return true;
+            else return false;
+        }
+
+        function sendDataToServer(data) {
+          let timestamp = new Date(data.Timestamp).toISOString();  // ISO-Format generieren
+          let production = data.Production_W;
+          let consumption = data.Consumption_W;
+
+          let batteryData = data.Pac_total_W;
+          let battery_charge = 0;
+          let battery_discharge = 0;
+
+          if (batteryData < 0) {
+            battery_charge = batteryData; 
+          } else if (batteryData > 0) {
+            battery_discharge = Math.abs(batteryData); 
+          }
+
+          let gridData = data.GridFeedIn_W;
+          let grid_feedin = 0;
+          let grid_consumption = 0;
+
+          if (gridData > 0) {
+            grid_feedin = gridData;
+          } else if (gridData < 0) {
+            grid_consumption = Math.abs(gridData);
+          }
+
+          let battery_state_of_charge = data.USOC;
+          let direct_consumption = Math.abs(data.Consumption_W);
+
+          let dataforcsv = {
+            timestamp: timestamp,  // ISO-Zeitformat verwenden
+            production: production,
+            consumption: consumption,
+            battery_charge: battery_charge,
+            battery_discharge: battery_discharge,
+            grid_feedin: grid_feedin,
+            grid_consumption: grid_consumption,
+            battery_state_of_charge: battery_state_of_charge,
+            direct_consumption: direct_consumption
+          };
+          
+
+          fetch('http://dashboard:3000/save', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify([dataforcsv])  // Daten an den Server senden
+          })
+          .then(response => response.text())
+          .then(data => console.log(data))
+          .catch(error => console.error('Error:', error));
+
+           // Überprüfe die gesendeten Daten
+        }
+
+
+
+        function updateAnimations(data) {
+          let BatteryCharging = data.BatteryCharging;
+          let BatteryDischarging = data.BatteryDischarging;
+          let FlowConsumptionProduction = data.FlowConsumptionProduction;
+          let FlowConsumptionGrid = data.FlowConsumptionGrid;
+          let FlowProductionGrid = data.FlowProductionGrid;
+          let FlowConsumptionBattery = data.FlowConsumptionBattery;
+          let FlowProductionBattery = data.FlowProductionBattery;
+          let FlowGridBattery = data.FlowGridBattery;
+          let FlowGridConsumption = data.FlowGridConsumption;
+          let Production_W = data.Production_W; 
+          let Consumption_W = data.Consumption_W; 
+        
+          // 1. Lädt die PV-Anlage die Batterie?
+          if (BatteryCharging && FlowProductionBattery) {
+              AnimationPvBatterie(true);
+          } else {
+              AnimationPvBatterie(false);
+          }
+
+          // 2. Deckt die PV-Anlage den Haushaltsverbrauch?
+          if (FlowConsumptionProduction) {
+              AnimationPvAnlageHaushalt(true);
+          } else {
+              AnimationPvAnlageHaushalt(false);
+          }
+
+          // 3. Speist die PV-Anlage in das Netz ein?
+          if (FlowProductionGrid || (Consumption_W < 0)) {
+              AnimationPvNetz(true);
+          } else {
+              AnimationPvNetz(false);
+          }
+
+          // 4. Muss die Batterie den Haushaltsverbrauch decken?
+          if (BatteryDischarging && FlowConsumptionBattery) {
+              AnimationBatterieHaus(true);
+          } else {
+              AnimationBatterieHaus(false);
+          }
+
+          // 5. Lädt das Netz die Batterie?
+          if (FlowGridBattery && BatteryCharging) {
+              AnimationNetzBatterie(true);
+          } else {
+              AnimationNetzBatterie(false);
+          }
+
+          // 6. Deckt das Netz den Haushaltsverbrauch?
+          if (FlowConsumptionGrid) {
+              AnimationNetzHaushalt(true);
+          } else {
+              AnimationNetzHaushalt(false);
+          }
+        }
+
+        function Wetter(wetterart, temperatur) {
+          if(wetterart == 0) {
+            document.getElementById("WetterIcon").src = "Wettericons/sonnig.png";
+            document.getElementById("Wetteranzeige").textContent = "Sonnig " + temperatur+ "°C, Gauangelloch";
+          } else if(wetterart == 1) {
+            document.getElementById("WetterIcon").src = "Wettericons/Bewoelkt.png";
+            document.getElementById("Wetteranzeige").textContent = "Bewölkt " + temperatur+ "°C, Gauangelloch";
+          } else if(wetterart == 2) {
+            document.getElementById("WetterIcon").src = "Wettericons/RegenLeicht.png";
+            document.getElementById("Wetteranzeige").textContent = "Leichter Regen " + temperatur+ "°C, Gauangelloch";
+          } else if(wetterart == 3) {
+            document.getElementById("WetterIcon").src = "Wettericons/RegenMittel.png";
+            document.getElementById("Wetteranzeige").textContent = "Regen " + temperatur+ "°C, Gauangelloch";
+          } else if(wetterart == 4) {
+            document.getElementById("WetterIcon").src = "Wettericons/sturm.png";
+            document.getElementById("Wetteranzeige").textContent = "Sturm " + temperatur+ "°C, Gauangelloch";
+          } else if(wetterart == 5) {
+            document.getElementById("WetterIcon").src = "Wettericons/nacht.png";
+            document.getElementById("Wetteranzeige").textContent = "Nacht " + temperatur+ "°C, Gauangelloch";
+          }
+
+
+        }
+        
+        function PVProduktion(erzeugung) {
+          document.getElementById("PVProduktion").textContent = erzeugung;
+        }
+
+        function Netzbezug(bezug) {
+          let netz = bezug;
+          
+          if(netz < 0) {
+            document.querySelector('.NetzbezugText').textContent = "Netzbezug";
+          } else {
+            document.querySelector('.NetzbezugText').textContent = "Einspeisung";
+          }
+          netz = (Math.abs(bezug) / 1000).toFixed(1);
+          
+          document.getElementById("Netzbezug").textContent = netz;
+          
+        }
+
+        function Batterie(prozent, w) {
+          const maxHoehe = 188;
+          let neueHoehe = (prozent / 100) * maxHoehe;
+          document.querySelector('.Rectangle16').style.height = neueHoehe + 'px';
+          document.querySelector('.Rectangle16').style.top = (maxHoehe - neueHoehe) + 'px';
+
+          if(prozent <= 5) {
+            document.querySelector('.Rectangle16').style.backgroundColor = 'rgba(255, 0, 76, 0.61)';
+          } else {
+            document.querySelector('.Rectangle16').style.backgroundColor = 'rgba(0, 64.65, 255, 0.61);';  
+          }
+
+          document.querySelector('.Prozent').textContent = prozent + '%';
+
+          if(w < 0) {
+            document.querySelector('.EntlDt').textContent = "Lädt";
+            w = (Math.abs(w)/1000).toFixed(1);
+            
+          } else {
+            document.querySelector('.EntlDt').textContent = "Entlädt";
+            w = (w/1000).toFixed(1);
+          }
+
+          document.querySelector('.BatterieKW').textContent = w;
+          
+
+        }
+
+        function HaushaltVerbrauch(verbrauch) {
+          document.getElementById("Haushalt_Verbrauch_Kw").textContent = verbrauch.toFixed(1);
+        }
+        
+        function AnimationNetzBatterie(status) {
+          const colorOn = '#4942E4';
+          const colorOFF = '#FFFFFF';
+          const colorOffCircles = '#FFFFFF'
+          const colorOnCircles = '#FFFFFF'
+          
+          if(status) {
+            document.querySelector('.NetzBatterieOn').style.backgroundColor = colorOn;
+            document.getElementById('NB1').style.animationPlayState = 'running';
+            document.getElementById('NB2').style.animationPlayState = 'running';
+            document.getElementById('NB3').style.animationPlayState = 'running';
+            document.getElementById('NB4').style.animationPlayState = 'running';
+
+            document.getElementById('NB1').style.background = colorOnCircles;
+            document.getElementById('NB2').style.background = colorOnCircles;
+            document.getElementById('NB3').style.background = colorOnCircles;
+            document.getElementById('NB4').style.background = colorOnCircles;
+
+          } else if(!status) {
+            document.querySelector('.NetzBatterieOn').style.backgroundColor = colorOFF;
+            document.getElementById('NB1').style.animationPlayState = 'paused';
+            document.getElementById('NB2').style.animationPlayState = 'paused';
+            document.getElementById('NB3').style.animationPlayState = 'paused';
+            document.getElementById('NB4').style.animationPlayState = 'paused';
+            
+            document.getElementById('NB1').style.background = colorOffCircles;
+            document.getElementById('NB2').style.background = colorOffCircles;
+            document.getElementById('NB3').style.background = colorOffCircles;
+            document.getElementById('NB4').style.background = colorOffCircles;
+
+          }    
+        }
+
+        function AnimationPvAnlageHaushalt(status) {
+          const colorOn = '#3a33b3';
+          const colorOFF = '#FFFFFF';
+          const colorOffCircles = '#FFFFFF'
+          const colorOnCircles = '#FFFFFF'  
+        
+          if(status) {
+            document.querySelector('.PVHaus').style.backgroundColor = colorOn;
+            document.getElementById('PH1').style.animationPlayState = 'running';
+            document.getElementById('PH2').style.animationPlayState = 'running';
+            document.getElementById('PH3').style.animationPlayState = 'running';
+            document.getElementById('PH4').style.animationPlayState = 'running';
+            
+            document.getElementById('PH1').style.background = colorOnCircles;
+            document.getElementById('PH2').style.background = colorOnCircles;
+            document.getElementById('PH3').style.background = colorOnCircles;
+            document.getElementById('PH4').style.background = colorOnCircles;
+
+          } else if(!status) {
+            document.querySelector('.PVHaus').style.backgroundColor = colorOFF;
+            document.getElementById('PH1').style.animationPlayState = 'paused';
+            document.getElementById('PH2').style.animationPlayState = 'paused';
+            document.getElementById('PH3').style.animationPlayState = 'paused';
+            document.getElementById('PH4').style.animationPlayState = 'paused';
+
+            document.getElementById('PH1').style.background = colorOffCircles;
+            document.getElementById('PH2').style.background = colorOffCircles;
+            document.getElementById('PH3').style.background = colorOffCircles;
+            document.getElementById('PH4').style.background = colorOffCircles;
+          }
+        }
+
+        function AnimationPvBatterie(status) {
+          const colorOn = '#3a33b3';
+          const colorOFF = '#FFFFFF';
+          const colorOffCircles = '#FFFFFF'
+          const colorOnCircles = '#FFFFFF'  
+
+          if(status) {
+            document.querySelector('.PvBatterie1').style.backgroundColor = colorOn;
+            document.querySelector('.PvBatterie2').style.backgroundColor = colorOn;
+            document.getElementById('PB1').style.animationPlayState = 'running';
+            document.getElementById('PB2').style.animationPlayState = 'running';
+            document.getElementById('PB3').style.animationPlayState = 'running';
+            document.getElementById('PB4').style.animationPlayState = 'running';
+
+            document.getElementById('PB1').style.background = colorOnCircles;
+            document.getElementById('PB2').style.background = colorOnCircles;
+            document.getElementById('PB3').style.background = colorOnCircles;
+            document.getElementById('PB4').style.background = colorOnCircles;
+
+          } else if(!status) {
+            document.querySelector('.PvBatterie1').style.backgroundColor = colorOFF;
+            document.querySelector('.PvBatterie2').style.backgroundColor = colorOFF;
+            document.getElementById('PB1').style.animationPlayState = 'paused';
+            document.getElementById('PB2').style.animationPlayState = 'paused';
+            document.getElementById('PB3').style.animationPlayState = 'paused';
+            document.getElementById('PB4').style.animationPlayState = 'paused';
+
+            document.getElementById('PB1').style.background = colorOffCircles;
+            document.getElementById('PB2').style.background = colorOffCircles;
+            document.getElementById('PB3').style.background = colorOffCircles;
+            document.getElementById('PB4').style.background = colorOffCircles;
+          }
+        }
+
+        function AnimationNetzHaushalt(status) {
+          const colorOn = '#4942E4';
+          const colorOFF = '#FFFFFF';
+          const colorOffCircles = '#FFFFFF'
+          const colorOnCircles = '#FFFFFF'
+
+          if(status) {
+            document.querySelector('.NetzHaushalt1').style.backgroundColor = colorOn;
+            document.querySelector('.NetzHaushalt2').style.backgroundColor = colorOn;
+            document.getElementById('NH1').style.animationPlayState = 'running';
+            document.getElementById('NH2').style.animationPlayState = 'running';
+            document.getElementById('NH3').style.animationPlayState = 'running';
+            document.getElementById('NH4').style.animationPlayState = 'running';
+
+            document.getElementById('NH1').style.background = colorOnCircles;
+            document.getElementById('NH2').style.background = colorOnCircles;
+            document.getElementById('NH3').style.background = colorOnCircles;
+            document.getElementById('NH4').style.background = colorOnCircles;
+
+          } else if(!status) {
+            document.querySelector('.NetzHaushalt1').style.backgroundColor = colorOFF;
+            document.querySelector('.NetzHaushalt2').style.backgroundColor = colorOFF;
+            document.getElementById('NH1').style.animationPlayState = 'paused';
+            document.getElementById('NH2').style.animationPlayState = 'paused';
+            document.getElementById('NH3').style.animationPlayState = 'paused';
+            document.getElementById('NH4').style.animationPlayState = 'paused';
+
+            document.getElementById('NH1').style.background = colorOffCircles;
+            document.getElementById('NH2').style.background = colorOffCircles;
+            document.getElementById('NH3').style.background = colorOffCircles;
+            document.getElementById('NH4').style.background = colorOffCircles;
+          }
+        }
+
+        function AnimationPvNetz(status) {
+          const colorOn = '#3a33b3';
+          const colorOFF = '#FFFFFF';
+          const colorOffCircles = '#FFFFFF'
+          const colorOnCircles = '#FFFFFF'
+
+          if(status) {
+            document.querySelector('.PvNetz1').style.backgroundColor = colorOn;
+            document.querySelector('.PvNetz2').style.backgroundColor = colorOn;
+            document.getElementById('PN1').style.animationPlayState = 'running';
+            document.getElementById('PN2').style.animationPlayState = 'running';
+            document.getElementById('PN3').style.animationPlayState = 'running';
+            document.getElementById('PN4').style.animationPlayState = 'running';
+
+            document.getElementById('PN1').style.background = colorOnCircles;
+            document.getElementById('PN2').style.background = colorOnCircles;
+            document.getElementById('PN3').style.background = colorOnCircles;
+            document.getElementById('PN4').style.background = colorOnCircles;
+
+          } else if(!status) {
+            document.querySelector('.PvNetz1').style.backgroundColor = colorOFF;
+            document.querySelector('.PvNetz2').style.backgroundColor = colorOFF;
+            document.getElementById('PN1').style.animationPlayState = 'paused';
+            document.getElementById('PN2').style.animationPlayState = 'paused';
+            document.getElementById('PN3').style.animationPlayState = 'paused';
+            document.getElementById('PN4').style.animationPlayState = 'paused';
+
+            document.getElementById('PN1').style.background = colorOffCircles;
+            document.getElementById('PN2').style.background = colorOffCircles;
+            document.getElementById('PN3').style.background = colorOffCircles;
+            document.getElementById('PN4').style.background = colorOffCircles;
+          }
+        }
+
+        function AnimationBatterieHaus(status) {
+          const colorOn = 'rgba(0, 64.65, 255, 0.61)';
+          const colorOFF = '#FFFFFF';
+          const colorOffCircles = '#FFFFFF'
+          const colorOnCircles = '#FFFFFF'
+
+          if(status) {
+            document.querySelector('.BatterieHaus1').style.backgroundColor = colorOn;
+            document.querySelector('.BatterieHaus2').style.backgroundColor = colorOn;
+            document.getElementById('BH1').style.animationPlayState = 'running';
+            document.getElementById('BH2').style.animationPlayState = 'running';
+            document.getElementById('BH3').style.animationPlayState = 'running';
+            document.getElementById('BH4').style.animationPlayState = 'running';
+
+            document.getElementById('BH1').style.background = colorOnCircles;
+            document.getElementById('BH2').style.background = colorOnCircles;
+            document.getElementById('BH3').style.background = colorOnCircles;
+            document.getElementById('BH4').style.background = colorOnCircles;
+
+          } else if(!status) {
+            document.querySelector('.BatterieHaus1').style.backgroundColor = colorOFF;
+            document.querySelector('.BatterieHaus2').style.backgroundColor = colorOFF;
+            document.getElementById('BH1').style.animationPlayState = 'paused';
+            document.getElementById('BH2').style.animationPlayState = 'paused';
+            document.getElementById('BH3').style.animationPlayState = 'paused';
+            document.getElementById('BH4').style.animationPlayState = 'paused';
+
+            document.getElementById('BH1').style.background = colorOffCircles;
+            document.getElementById('BH2').style.background = colorOffCircles;
+            document.getElementById('BH3').style.background = colorOffCircles;
+            document.getElementById('BH4').style.background = colorOffCircles;
+          }
+        }
+
+    </script>
+    <script>
+      let heute;
+      let diesesJahr;
+      let dieLetztenJahre;
+  
+      function produktionAllTime(heute, Jahr, letztenJahre) {
+          let {todayProd, todayCons, todayFeedIn, todayFeedOut} = heute;
+          let {thisYearProd, thisYearCons, thisYearFeedIn, thisYearFeedOut} = Jahr;
+          let {lastYearsProd, lastYearsCons, lastYearsFeedIn, lastYearsFeedOut} = letztenJahre;
+  
+          let gesProd = todayProd + thisYearProd + lastYearsProd;
+          let gesCons = todayCons + thisYearCons + lastYearsCons;
+          let gesFeedIn = todayFeedIn + thisYearFeedIn + lastYearsFeedIn;
+          let gesFeedOut = todayFeedOut + thisYearFeedOut + lastYearsFeedOut;
+
+          //console.log("today:", todayProd, todayCons, todayFeedIn, todayFeedOut);
+          //console.log("2024:", thisYearProd, thisYearCons, thisYearFeedIn, thisYearFeedOut);
+          //console.log("2023/22:", lastYearsProd, lastYearsCons, lastYearsFeedIn, lastYearsFeedOut);
+          //console.log("ges:", gesProd, gesCons, gesFeedIn, gesFeedOut);
+
+          let autarkie; 
+          autarkie = (((gesCons - gesFeedIn) / gesCons)*100);
+          document.querySelector('.gesAutpercenz').innerHTML = "<b>" + Math.round(autarkie) + "% <b>";
+
+          let gesProdInKw = Math.round(gesProd);
+          let formattedProd = gesProdInKw.toLocaleString('de-DE') + "kWh"; 
+
+          document.getElementById('gesProduktion').innerHTML = "Gesamtproduktion: " + formattedProd;
+          document.querySelector('.gesProduktionIngWh').innerHTML = ((gesProd/1000)).toFixed(1) + "gWh";
+          
+          
+          document.querySelector('.gesConsIngWh').innerHTML = ((gesCons/1000)).toFixed(1) + "gWh";
+          
+          
+
+          
+      }
+  
+      async function fetchDataToday() {
+          const response = await fetch('http://dashboard:3000/measurements.csv');
+          const data = await response.text();
+          return data;
+      }
+  
+      function calcProConToday(data) {
+          const lines = data.split('\n');
+          const rows = lines.slice(1).map(line => line.split(','));
+  
+          let totalProductionToday = 0;
+          let totalConsumptionToday = 0;
+          let totalfeedin = 0;
+          let totalfeedout = 0;
+  
+          rows.forEach(row => {
+              const production = Number(row[1]);
+              const consumption = Number(row[2]);
+              const feedin = Number(row[5]);
+              const feedout = Number(row[6]);
+  
+              if (!isNaN(production)) {
+                  totalProductionToday += production;
+              }
+              
+              if (!isNaN(consumption)) {
+                  totalConsumptionToday += consumption;
+              }
+
+              if (!isNaN(feedin)) {
+                    totalfeedin += feedin;
+                }
+              if (!isNaN(feedout)) {
+                  totalfeedout += feedout;
+              }
+          });
+  
+          const newtotalProductionToday = (((totalProductionToday)/60)/1000);
+          const newtotalConsumptionToday = (((totalConsumptionToday)/60)/1000);
+          let newTotalfeedinToday = (((totalProductionToday)/60)/1000);
+          let newTotalfeedoutToday = (((totalConsumptionToday)/60)/1000);
+  
+          return {
+              todayProd: newtotalProductionToday,
+              todayCons: newtotalConsumptionToday,
+              todayFeedIn: newTotalfeedinToday,
+              todayFeedOut: newTotalfeedoutToday
+
+          };
+      }
+  
+      async function fetchData2024() {
+          const response = await fetch('http://dashboard:3000/statistics/statistics.csv');
+          const data = await response.text();
+          return data;
+      }
+  
+      function calcProCon2024(data) {
+          const lines = data.split('\n');
+          const rows = lines.slice(1).map(line => line.split(','));
+  
+          let totalProduction = 0;
+          let totalConsumption = 0;
+          let totalfeedin = 0;
+          let totalfeedout = 0;
+
+          rows.forEach(row => {
+              const production = Number(row[1]);
+              const consumption = Number(row[2]);
+              const feedin = Number(row[5]);
+              const feedout = Number(row[6]);
+  
+              if (!isNaN(production)) {
+                  totalProduction += production;
+              }
+  
+              if (!isNaN(consumption)) {
+                  totalConsumption += consumption;
+              }
+              
+              if (!isNaN(feedin)) {
+                    totalfeedin += feedin;
+                }
+              
+                if (!isNaN(feedout)) {
+                  totalfeedout += feedout;
+              }
+          });
+  
+          let newtotalProduction = ((totalProduction)/1000);
+          let newtotalConsumption = ((totalConsumption)/1000);
+          let newTotalfeedin = (((totalProduction)/60)/1000);
+          let newTotalfeedout =(((totalConsumption)/60));
+
+          return {
+              thisYearProd: newtotalProduction,
+              thisYearCons: newtotalConsumption,
+              thisYearFeedIn: newTotalfeedin,
+              thisYearFeedOut: newTotalfeedout
+          };
+      }
+  
+      async function fetchData2023() {
+          const response = await fetch('http://dashboard:3000/statistics/2023.csv');
+          const data2023 = await response.text();
+          return data2023;
+      }
+  
+      async function fetchData2022() {
+          const response = await fetch('http://dashboard:3000/statistics/2022.csv');
+          const data2022 = await response.text();
+          return data2022;
+      }
+  
+      function calcProCon2023_2022(data2023, data2022) {
+          const lines2023 = data2023.split('\n');
+          const rows2023 = lines2023.slice(1).map(line => line.split(','));
+  
+          const lines2022 = data2022.split('\n');  // Hier korrekt auf data2022 zugreifen
+          const rows2022 = lines2022.slice(1).map(line => line.split(','));
+  
+          let totalProduction = 0;
+          let totalConsumption = 0;
+          let totalfeedin = 0;
+          let totalfeedout = 0;
+  
+          rows2023.forEach(row2023 => {
+              const production = Number(row2023[1]);
+              const consumption = Number(row2023[2]);
+              const feedin = Number(row2023[5]);
+              const feedout = Number(row2023[6]);
+  
+              if (!isNaN(production)) {
+                totalProduction += production;
+              }
+  
+              if (!isNaN(consumption)) {
+                totalConsumption += consumption;
+              }
+              
+              if (!isNaN(feedin)) {
+                totalfeedin += feedin;
+              }
+              
+              if (!isNaN(feedout)) {
+                totalfeedout += feedout;
+              }
+          });
+  
+          rows2022.forEach(row2022 => {
+              const production = Number(row2022[1]);
+              const consumption = Number(row2022[2]);
+              const feedin = Number(row2022[5]);
+              const feedout = Number(row2022[6]);
+  
+              if (!isNaN(production)) {
+                  totalProduction += production;
+              }
+  
+              if (!isNaN(consumption)) {
+                  totalConsumption += consumption;
+              }
+
+              if (!isNaN(feedin)) {
+                    totalfeedin += feedin;
+                }
+              
+                if (!isNaN(feedout)) {
+                  totalfeedout += feedout;
+              }
+          });
+
+          let newtotalProduction = ((totalProduction)/1000);
+          let newtotalConsumption = ((totalConsumption)/1000);
+          let newTotalfeedin = ((((totalProduction)/60))/1000);
+          let newTotalfeedout = (((totalConsumption)/60)/1000);
+  
+          return {
+              lastYearsProd: newtotalProduction,
+              lastYearsCons: newtotalConsumption,
+              lastYearsFeedIn: newTotalfeedin,
+              lastYearsFeedOut: newTotalfeedout
+          };
+      }
+  
+      async function loadAndDisplayData() {
+          const dataToday = await fetchDataToday();
+          heute = calcProConToday(dataToday);
+  
+          const data2024 = await fetchData2024();
+          diesesJahr = calcProCon2024(data2024);
+  
+          const data2023 = await fetchData2023();
+          const data2022 = await fetchData2022();
+          dieLetztenJahre = calcProCon2023_2022(data2023, data2022);
+  
+          produktionAllTime(heute, diesesJahr, dieLetztenJahre);
+      }
+  
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,4 @@
+timestamp,production,consumption,battery_charge,battery_discharge,grid_feedin,grid_consumption,battery_state_of_charge,direct_consumption
+2024-12-08T14:12:59.000Z,415,386,-21,0,11,0,20,386
+2024-12-08T19:17:59.000Z,0,455,-2,0,0,457,5,455
+2025-05-21T23:04:59.000Z,0,272,0,248,0,23,45,272
