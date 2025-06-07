@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @font-face {
+          font-family: 'Pally-Regular';
+          src: url('/fonts/Pally-Regular.ttf') format('truetype');
+          font-weight: 400;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Medium';
+          src: url('/fonts/Pally-Medium.ttf') format('truetype');
+          font-weight: 500;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Bold';
+          src: url('/fonts/Pally-Bold.ttf') format('truetype');
+          font-weight: 700;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Variable';
+          src: url('/fonts/Pally-Variable.ttf') format('truetype');
+          font-weight: 400 700;
+          font-display: swap;
+          font-style: normal;
+        }
+  
+        .font-regular {
+            font-family: 'Pally-Regular', sans-serif;
+            font-weight: 400;
+            }
+  
+        .font-medium {
+            font-family: 'Pally-Medium', sans-serif;
+            font-weight: 500;
+        }
+  
+        .font-bold {
+            font-family: 'Pally-Bold', sans-serif;
+            font-weight: 700;
+        }
+  
+        .font-variable {
+            font-family: 'Pally-Variable', sans-serif;
+        }
+
+        @keyframes Switch {
+            0% {
+                transform: translateX(488px) scale(1.638);   /* Start bei 300px */
+            }
+            4.55% {
+                transform: translateX(-0px) scale(1.638);  /* Bewegung von 300px nach 0px in 0.5 Sekunden */
+            }
+            50% {
+                transform: translateX(0px) scale(1.638);  /* Pause für 10 Sekunden bei 0px */
+            }
+            54.55% {
+                transform: translateX(-488px) scale(1.638);  /* Bewegung von 0px nach -300px in 0.5 Sekunden */
+            }
+            100% {
+                transform: translateX(-488px) scale(1.638);   /* Pause für 10 Sekunden bei -300px */
+            }
+        }
+
+/* Verwende die will-change-Eigenschaft, um die Performance der Animationen zu verbessern */
+.JahresStatistik, .TagesStatistik {
+  will-change: transform;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="Background" style="left: 0; top: 0%; position: absolute; width: 487.2332px; height: 1040px; background: rgba(191, 172, 226, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex;justify-content: center; overflow: hidden;">
+        <div class="JahresStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 30s linear infinite; ">
+            <div style="top: 7.5%; position: absolute; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 600; font-size: 32px; color: #ffffff;"><b>2024</b></div>
+            <div class="gesProduktion" style="top: 17.5%; width: 150px; height: 150px; position: absolute; background-color: #5b3fb1; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="production-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Produktion</div>
+            </div>
+
+            <div class="gesVerbrauch" style="top: 55%; width: 150px; height: 150px; position: absolute; background-color: #8696FE; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="verbrauch-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Verbrauch</div>
+            </div>
+
+            <div class="gesAutarkie" style="top: 92.5%; width: 150px; height: 150px; position: absolute; background-color: #8e9add; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="ges-autarkie-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>100%</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Autarkie</div>
+            </div>
+        </div>
+
+        <div class="TagesStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 30s linear infinite; animation-delay: 15s;">
+            <div style="top: 7.5%; position: absolute; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 600; font-size: 32px; color: #ffffff;"><b>Heute</b></div>
+            <div class="todayProduktion" style="top: 17.5%; width: 150px; height: 150px; position: absolute; background-color: #5b3fb1; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-production-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Produktion</div>
+            </div>
+
+            <div class="todayVerbrauch" style="top: 55%; width: 150px; height: 150px; position: absolute; background-color: #8696FE; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-verbrauch-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Verbrauch</div>
+            </div>
+
+            <div class="todayAutarkie" style="top: 92.5%; width: 150px; height: 150px; position: absolute; background-color: #8e9add; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-autarkie-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>100%</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Autarkie</div>
+            </div>
+        </div>
+    </div>
+   
+
+    <script>    
+  
+        // Fetch für die data2024 Daten
+        async function fetchData2024() {
+            try {
+                const response = await fetch('http://dashboard:3000/data2024');
+                if (!response.ok) {
+                    throw new Error('Netzwerkantwort war nicht ok');
+                }
+                const data = await response.json();
+                const [production, consumption, autarky] = data.data2024;
+                
+                document.querySelector('.production-value').innerHTML = "<b>" + Math.round(production) + "kWh</b>";
+                document.querySelector('.verbrauch-value').innerHTML = "<b>" + Math.round(consumption) + "kWh</b>";
+                document.querySelector('.ges-autarkie-value').innerHTML = "<b>" + Math.round(autarky) + "% <b>";
+                console.log('Data 2024 - Production:', production, 'Consumption:', consumption, 'Autarky:', autarky);
+                
+                return { production, consumption, autarky };
+            } catch (error) {
+                console.error('Fehler beim Abrufen von data2024:', error);
+            }
+        }
+
+        // Fetch für die heutigen Daten
+        async function fetchTodaysData() {
+            try {
+                const response = await fetch('http://dashboard:3000/todaysData');
+                if (!response.ok) {
+                    throw new Error('Netzwerkantwort war nicht ok');
+                }
+                const data = await response.json();
+                const [production, consumption, autarky] = data.todaysData;
+                console.log('Todays Data - Production:', production, 'Consumption:', consumption, 'Autarky:', autarky);
+                
+                document.querySelector('.todays-production-value').innerHTML = "<b>" + Math.round(production) + "kWh</b>";
+                document.querySelector('.todays-verbrauch-value').innerHTML = "<b>" + Math.round(consumption) + "kWh</b>";
+                document.querySelector('.todays-autarkie-value').innerHTML = "<b>" + Math.round(autarky) + "% <b>";
+                
+                return { production, consumption, autarky };
+            } catch (error) {
+                console.error('Fehler beim Abrufen von todaysData:', error);
+            }
+        }        
+
+        async function executeEveryMinute() {
+            fetchTodaysData();
+        }
+        
+        async function executeEveryHour() {
+            fetchData2024();
+        }
+
+        async function startClock() {
+            let lastMinute = new Date().getMinutes(); // Aktuelle Sekunde zu Beginn speichern
+            let lastHour = new Date().getHours();
+            function checkTime() {
+                const now = new Date();
+                const currentMinute = now.getMinutes();
+                const currentHour = now.getHours();
+
+                // Wenn sich die Sekunde geändert hat, wird die Funktion aufgerufen
+                if (currentMinute !== lastMinute) {
+                    lastMinute = currentMinute;
+                    executeEveryMinute();
+                }
+
+                if (currentHour !== lastHour) {
+                    lastHour = currentHour;
+                    executeEveryHour();
+                }
+
+                requestAnimationFrame(checkTime); // Nächste Ausführung planen
+            }
+
+            checkTime(); // Startet die Schleife
+        }
+
+        window.onload = function() {
+            executeEveryHour();
+            executeEveryMinute();
+            startClock();
+        }
+
+    </script>
+    
+</body>
+</html>
