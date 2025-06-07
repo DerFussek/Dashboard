@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Analog Clock</title>
+  </head>
+
+  <body>
+    <div class="Clocksystem " style="left: 0px; top: 0px; position: absolute; width: 540.5338px; height: 510px; background: rgba(255, 255, 255, 0);  border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center;"">
+      <div id="digitalClockDisplay" style="left: 10px; top: 0px; position: absolute; width: 520.5338px; height: 237.5px; background: rgba(18, 48, 174, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: rgb(255, 255, 255); font-family:'Pally-Variable', sans-serif; font-weight: 600; font-size: 120px;">err:err:err</div>
+      <div id="Datum" style="left: 300px; top: 272px; position: absolute; width: 235px; height: 227.5px; background: rgba(108, 72, 197, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: rgb(255, 255, 255); font-family:'Pally-Regular', sans-serif; font-weight: 400; font-size: 90px;">err<br>err</div>
+      <div class="Uhr" style="left: 10px; top: 272.5px; position: absolute; width: 235px; height: 227.5px; background: rgba(108, 72, 197, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+          <div class="container">
+            
+            <div class="clock">
+              <div style="--clr: #ffffff; --h: 54px" id="hour" class="hand">
+                <i></i>
+              </div>
+              <div style="--clr: #ffffff; --h: 64px" id="min" class="hand">
+                <i></i>
+              </div>
+              <div style="--clr: #000000; --h: 74px" id="sec" class="hand">
+                <i></i>
+              </div>
+
+              <span style="--i: 1;"><b>1</b></span>
+              <span style="--i: 2"><b>2</b></span>
+              <span style="--i: 3"><b>3</b></span>
+              <span style="--i: 4"><b>4</b></span>
+              <span style="--i: 5"><b>5</b></span>
+              <span style="--i: 6"><b>6</b></span>
+              <span style="--i: 7"><b>7</b></span>
+              <span style="--i: 8"><b>8</b></span>
+              <span style="--i: 9"><b>9</b></span>
+              <span style="--i: 10"><b>10</b></span>
+              <span style="--i: 11"><b>11</b></span>
+              <span style="--i: 12"><b>12</b></span>
+            </div>
+          </div>
+        </div>
+      </div>  
+    <script src="script.js">
+        //let dateDisplay = document.getElementById('Datum');
+    </script>
+  </body>
+</html>
