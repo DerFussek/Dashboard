@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @font-face {
+          font-family: 'Pally-Regular';
+          src: url('/fonts/Pally-Regular.woff2') format('woff2'),
+              url('/fonts/Pally-Regular.woff') format('woff'),
+              url('/fonts/Pally-Regular.ttf') format('truetype');
+          font-weight: 400;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Medium';
+          src: url('/fonts/Pally-Medium.woff2') format('woff2'),
+              url('/fonts/Pally-Medium.woff') format('woff'),
+              url('/fonts/Pally-Medium.ttf') format('truetype');
+          font-weight: 500;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Bold';
+          src: url('/fonts/Pally-Bold.woff2') format('woff2'),
+              url('/fonts/Pally-Bold.woff') format('woff'),
+              url('/fonts/Pally-Bold.ttf') format('truetype');
+          font-weight: 700;
+          font-display: swap;
+          font-style: normal;
+        }
+        @font-face {
+          font-family: 'Pally-Variable';
+          src: url('/fonts/Pally-Variable.woff2') format('woff2'),
+              url('/fonts/Pally-Variable.woff') format('woff'),
+              url('/fonts/Pally-Variable.ttf') format('truetype');
+          font-weight: 400 700;
+          font-display: swap;
+          font-style: normal;
+        }
+  
+        .font-regular {
+            font-family: 'Pally-Regular', sans-serif;
+            font-weight: 400;
+            }
+  
+        .font-medium {
+            font-family: 'Pally-Medium', sans-serif;
+            font-weight: 500;
+        }
+  
+        .font-bold {
+            font-family: 'Pally-Bold', sans-serif;
+            font-weight: 700;
+        }
+  
+        .font-variable {
+            font-family: 'Pally-Variable', sans-serif;
+        }
+
+        @keyframes Switch {
+            0% {
+                transform: translateX(488px) scale(1.638);   /* Start bei 300px */
+            }
+            4.55% {
+                transform: translateX(-0px) scale(1.638);  /* Bewegung von 300px nach 0px in 0.5 Sekunden */
+            }
+            50% {
+                transform: translateX(0px) scale(1.638);  /* Pause für 10 Sekunden bei 0px */
+            }
+            54.55% {
+                transform: translateX(-488px) scale(1.638);  /* Bewegung von 0px nach -300px in 0.5 Sekunden */
+            }
+            100% {
+                transform: translateX(-488px) scale(1.638);   /* Pause für 10 Sekunden bei -300px */
+            }
+        }
+
+/* Verwende die will-change-Eigenschaft, um die Performance der Animationen zu verbessern */
+.JahresStatistik, .TagesStatistik {
+  will-change: transform;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="Background" style="left: 0; top: 0%; position: absolute; width: 487.2332px; height: 1040px; background: rgba(191, 172, 226, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex;justify-content: center; overflow: hidden;">
+        <div class="JahresStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 21s linear infinite; ">
+            <div style="top: 7.5%; position: absolute; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 600; font-size: 32px; color: #ffffff;"><b>2024</b></div>
+            <div class="gesProduktion" style="top: 17.5%; width: 150px; height: 150px; position: absolute; background-color: #5b3fb1; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="production-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Produktion</div>
+            </div>
+
+            <div class="gesVerbrauch" style="top: 55%; width: 150px; height: 150px; position: absolute; background-color: #8696FE; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="verbrauch-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Verbrauch</div>
+            </div>
+
+            <div class="gesAutarkie" style="top: 92.5%; width: 150px; height: 150px; position: absolute; background-color: #8e9add; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="ges-autarkie-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>100%</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Autarkie</div>
+            </div>
+        </div>
+
+        <div class="TagesStatistik" style="left: 0px; top: 150px; position: absolute; width: 487.2332px; height: 480px; background: rgba(255, 255, 255, 00); border-radius: 32px; display: flex;justify-content: center; animation: Switch 21s linear infinite; animation-delay: 10.5s;">
+            <div style="top: 7.5%; position: absolute; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 600; font-size: 32px; color: #ffffff;"><b>Heute</b></div>
+            <div class="todayProduktion" style="top: 17.5%; width: 150px; height: 150px; position: absolute; background-color: #5b3fb1; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #fdfdfd; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-production-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Produktion</div>
+            </div>
+
+            <div class="todayVerbrauch" style="top: 55%; width: 150px; height: 150px; position: absolute; background-color: #8696FE; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-verbrauch-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>1200kW</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Verbrauch</div>
+            </div>
+
+            <div class="todayAutarkie" style="top: 92.5%; width: 150px; height: 150px; position: absolute; background-color: #8e9add; border-radius: 50%; border: 2.5px solid #ffffff; display:flex; align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 24px; color: #ffffff; flex-direction: column; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                <div class="todays-autarkie-value" style="font-family: 'Pally-Bold', sans-serif; font-weight: 400; font-size: 26px;"><b>100%</b></div>
+                <div style="align-items: center; text-align: center; justify-content: center; font-family: 'Pally-Variable', sans-serif; font-weight: 400; font-size: 12px; color: #ffffff;">~Autarkie</div>
+            </div>
+        </div>
+    </div>
+   
+
+    <script>    
+        async function fetchDataToday() {
+            const response = await fetch('http://dashboard:3000/measurements.csv');
+            const data = await response.text();
+            return data;
+        }
+    
+        function calcProConToday(data) {
+            const lines = data.split('\n');
+            const rows = lines.slice(1).map(line => line.split(','));
+    
+            let totalProductionToday = 0;
+            let totalConsumptionToday = 0;
+    
+            rows.forEach(row => {
+                const production = Number(row[1]);
+                const consumption = Number(row[2]);
+    
+                if (!isNaN(production)) {
+                    totalProductionToday += production;
+                }
+                if (!isNaN(consumption)) {
+                    totalConsumptionToday += consumption;
+                }
+            });
+    
+            const newTotalProductionToday = ((((totalProductionToday)/60) / 1000)).toFixed(2);
+            const newTotalConsumptionToday = ((((totalConsumptionToday)/60) / 1000)).toFixed(2);
+    
+            document.querySelector('.todays-production-value').innerHTML = "<b>" + newTotalProductionToday + "kWh</b>";
+            document.querySelector('.todays-verbrauch-value').innerHTML = "<b>" + newTotalConsumptionToday + "kWh</b>";
+    
+            return {
+                todayProd: totalProductionToday,
+                todayCons: totalConsumptionToday
+            };
+        }
+
+        function calcAutarkieToday(data) {
+            const lines = data.split('\n');
+            const rows = lines.slice(1).map(line => line.split(','));
+
+            let totalProductionToday = 0;
+            let totalConsumptionToday = 0;
+            let totalfeedin = 0;
+            let totalfeedout = 0;
+    
+            rows.forEach(row => {
+                const production = Number(row[1]);
+                const consumption = Number(row[2]);
+                const feedin = Number(row[5]);
+                const feedout = Number(row[6]);
+    
+                if (!isNaN(production)) {
+                    totalProductionToday += production;
+                }
+                if (!isNaN(consumption)) {
+                    totalConsumptionToday += consumption;
+                }
+                if (!isNaN(feedin)) {
+                    totalfeedin += feedin;
+                }
+                if (!isNaN(feedout)) {
+                    totalfeedout += feedout;
+                }
+            });
+    
+            let newTotalProductionToday = ((((totalProductionToday)/60) / 1000)).toFixed(2);
+            let newTotalConsumptionToday = ((((totalConsumptionToday)/60) / 1000)).toFixed(2);
+            let newTotalfeedinToday = ((((totalProductionToday)/60) / 1000)).toFixed(2);
+            let newTotalfeedoutToday = ((((totalConsumptionToday)/60) / 1000)).toFixed(2);
+        
+            let autarkie; 
+            if(newTotalConsumptionToday > 0 && newTotalfeedinToday > 0) {    
+                autarkie = Math.abs((((newTotalConsumptionToday - newTotalfeedinToday) / newTotalConsumptionToday)*100).toFixed(0))
+            } else {
+                autarkie = 0;
+            }
+                document.querySelector('.todays-autarkie-value').innerHTML = "<b>" + autarkie + "% <b>";
+        }
+    
+        async function fetchData2024() {
+            const response = await fetch('http://dashboard:3000/statistics/statistics.csv');
+            const data = await response.text();
+            return data;
+        }
+    
+        function calcProCon2024(data) {
+            const lines = data.split('\n');
+            const rows = lines.slice(1).map(line => line.split(','));
+    
+            let totalProduction = 0;
+            let totalConsumption = 0;
+    
+            rows.forEach(row => {
+                const production = Number(row[1]);
+                const consumption = Number(row[2]);
+    
+                if (!isNaN(production)) {
+                    totalProduction += production;
+                }
+    
+                if (!isNaN(consumption)) {
+                    totalConsumption += consumption;
+                }
+            });
+    
+            newtotalProduction = Math.abs((totalProduction)/1000).toFixed(0);
+            newtotalConsumption = Math.abs((totalConsumption)/1000).toFixed(0);
+    
+            document.querySelector('.production-value').innerHTML = "<b>" + newtotalProduction + "kWh</b>";
+            document.querySelector('.verbrauch-value').innerHTML = "<b>" + newtotalConsumption + "kWh</b>";
+    
+            return {
+                thisYearProd: totalProduction,
+                thisYearCons: totalConsumption
+            };
+        }
+
+        function calcAutarkie2024(data) {
+            const lines = data.split('\n');
+            const rows = lines.slice(1).map(line => line.split(','));
+
+            let totalProductionToday = 0;
+            let totalConsumptionToday = 0;
+            let totalfeedin = 0;
+            let totalfeedout = 0;
+    
+            rows.forEach(row => {
+                const production = Number(row[1]);
+                const consumption = Number(row[2]);
+                const feedin = Number(row[5]);
+                const feedout = Number(row[6]);
+    
+                if (!isNaN(production)) {
+                    totalProductionToday += production;
+                }
+                if (!isNaN(consumption)) {
+                    totalConsumptionToday += consumption;
+                }
+                if (!isNaN(feedin)) {
+                    totalfeedin += feedin;
+                }
+                if (!isNaN(feedout)) {
+                    totalfeedout += feedout;
+                }
+            });
+    
+            let newTotalProductionToday = ((((totalProductionToday)/60) / 1000)).toFixed(2);
+            let newTotalConsumptionToday = ((((totalConsumptionToday)/60) / 1000)).toFixed(2);
+            let newTotalfeedinToday = ((((totalProductionToday)/60) / 1000)).toFixed(2);
+            let newTotalfeedoutToday = ((((totalConsumptionToday)/60) / 1000)).toFixed(2);
+        
+            let autarkie; 
+            if(newTotalConsumptionToday > 0 && newTotalfeedinToday > 0) {    
+                autarkie = Math.abs((((newTotalConsumptionToday - newTotalfeedinToday) / newTotalConsumptionToday)*100).toFixed(0));
+            } else {
+                autarkie = 0;
+            }
+                document.querySelector('.ges-autarkie-value').innerHTML = "<b>" + autarkie + "% <b>";
+        }
+
+        async function loadAndDisplayData() {
+            const dataToday = await fetchDataToday();
+            calcProConToday(dataToday);
+            calcAutarkieToday(dataToday);
+
+            const data2024 = await fetchData2024();
+            calcProCon2024(data2024);
+            calcAutarkie2024(data2024);
+    
+        }
+    
+        window.onload = setInterval(loadAndDisplayData, 5000);
+    </script>
+    
+</body>
+</html>
