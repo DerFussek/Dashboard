@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Analog Clock</title>
+  </head>
+
+  <body>
+    <div class="Clocksystem " style="left: 0px; top: 0px; position: absolute; width: 540.5338px; height: 510px; background: rgba(255, 255, 255, 0);  border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center;"">
+      <div id="digitalClockDisplay" style="left: 10px; top: 0px; position: absolute; width: 520.5338px; height: 237.5px; background: #E8ECD7; box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #727272;; font-family:'Pally-Variable', sans-serif; font-weight: 600; font-size: 120px;">err:err:err</div>
+      <div id="Datum" style="left: 300px; top: 272px; position: absolute; width: 235px; height: 227.5px; background: rgba(242, 107, 15, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: rgb(255, 255, 255); font-family:'Pally-Regular', sans-serif; font-weight: 400; font-size: 90px;">err<br>err</div>
+      <div class="Uhr" style="left: 10px; top: 272.5px; position: absolute; width: 235px; height: 227.5px; background: rgba(242, 107, 15, 1.0); box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); border-radius: 32px; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;">
+        <img src="Bild der Anlage_Solarzellenmodule.jpg" style="transform: scale(0.8);"></img>  
+      </div>
+      </div>  
+    <script>
+        let hr = document.getElementById('hour');
+        let min = document.getElementById('min');
+        let sec = document.getElementById('sec');
+
+        function displayTime() {
+            let date = new Date();
+
+            // Stunden, Minuten, Sekunden abrufen
+            let hh = date.getHours();
+            let mm = date.getMinutes();
+            let ss = date.getSeconds();
+
+            let day = date.getDate();  // Verwende getDate()
+            let month = date.getMonth();  // Monate gehen von 0 bis 11
+            const months = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"];
+
+            // Stunden und Minuten formatieren
+            if (day < 10) day = '0' + day;
+            if (hh < 10) hh = '0' + hh;
+            if (mm < 10) mm = '0' + mm;
+            if (ss < 10) ss = '0' + ss;
+
+            // Aktualisiere die digitale Uhr
+            document.getElementById('digitalClockDisplay').innerHTML = hh + ":" + mm + ":" + ss;
+            document.getElementById('Datum').innerHTML = "<b>" + day + "<br>" + months[month] + "</b>";
+        }
+
+        // Die Funktion alle 1000ms (1 Sekunde) aufrufen
+        setInterval(displayTime, 1000);
+    </script>
+  </body>
+</html>
